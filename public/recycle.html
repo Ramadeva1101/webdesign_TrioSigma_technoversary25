@@ -145,67 +145,67 @@
     <div x-show="modalOpen" x-transition:enter="transition duration-300 ease-out" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition duration-200 ease-in"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
         @click="closeModal()" style="display: none;">
         <div x-show="modalOpen" x-transition:enter="transition duration-300 ease-out delay-100"
             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition duration-200 ease-in" x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="glass-panel-strong rounded-3xl max-w-4xl w-full border border-emerald-500/30 overflow-hidden"
+            class="glass-panel-strong rounded-2xl sm:rounded-3xl max-w-4xl w-full border border-emerald-500/30 overflow-hidden my-4 sm:my-8 max-h-[95vh] sm:max-h-[90vh] flex flex-col"
             @click.stop>
-            <div class="relative">
+            <div class="relative flex-1 overflow-y-auto">
                 <button @click="closeModal()"
-                    class="absolute top-4 right-4 z-10 w-10 h-10 rounded-xl bg-stone-900/80 border border-stone-700 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 transition-all">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                    class="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-stone-900/80 border border-stone-700 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 transition-all touch-manipulation">
+                    <i data-lucide="x" class="w-4 h-4 sm:w-5 sm:h-5"></i>
                 </button>
 
-                <div class="p-6 md:p-10">
-                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="p-4 sm:p-6 md:p-10">
+                    <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 md:mb-8">
                         <div class="text-center">
                             <div
-                                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/40 mb-4">
-                                <i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>
-                                <span class="text-red-400 text-sm font-semibold">Sebelum</span>
+                                class="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-red-500/20 border border-red-500/40 mb-3 sm:mb-4">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-400"></i>
+                                <span class="text-red-400 text-xs sm:text-sm font-semibold">Sebelum</span>
                             </div>
-                            <div class="glass-panel rounded-2xl p-6 border border-stone-800 mb-4">
+                            <div class="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-stone-800 mb-3 sm:mb-4">
                                 <img :src="selectedItem.wasteImg" :alt="selectedItem.wasteName"
-                                    class="w-full h-48 object-contain">
+                                    class="w-full h-32 sm:h-40 md:h-48 object-contain">
                             </div>
-                            <h3 class="text-2xl font-display font-bold text-white" x-text="selectedItem.wasteName">
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-display font-bold text-white px-2" x-text="selectedItem.wasteName">
                             </h3>
                         </div>
 
                         <div class="text-center">
                             <div
-                                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 mb-4">
-                                <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
-                                <span class="text-emerald-400 text-sm font-semibold">Sesudah</span>
+                                class="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 mb-3 sm:mb-4">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400"></i>
+                                <span class="text-emerald-400 text-xs sm:text-sm font-semibold">Sesudah</span>
                             </div>
-                            <div class="glass-panel rounded-2xl p-6 border border-stone-800 mb-4">
+                            <div class="glass-panel rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-stone-800 mb-3 sm:mb-4">
                                 <img :src="selectedItem.recycledImg" :alt="selectedItem.recycledName"
-                                    class="w-full h-48 object-contain">
+                                    class="w-full h-32 sm:h-40 md:h-48 object-contain">
                             </div>
-                            <h3 class="text-2xl font-display font-bold text-emerald-400"
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-display font-bold text-emerald-400 px-2"
                                 x-text="selectedItem.recycledName"></h3>
                         </div>
                     </div>
 
-                    <div class="glass-panel rounded-2xl p-6 border border-blue-500/30">
-                        <div class="flex items-center gap-2 mb-4">
-                            <i data-lucide="info" class="w-5 h-5 text-blue-400"></i>
-                            <h4 class="text-lg font-display font-bold text-blue-400">Proses Daur Ulang</h4>
+                    <div class="glass-panel rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 border border-blue-500/30">
+                        <div class="flex items-center gap-2 mb-3 sm:mb-4">
+                            <i data-lucide="info" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400"></i>
+                            <h4 class="text-base sm:text-lg font-display font-bold text-blue-400">Proses Daur Ulang</h4>
                         </div>
-                        <p class="text-stone-300 leading-relaxed" x-text="selectedItem.description"></p>
+                        <p class="text-stone-300 text-sm sm:text-base leading-relaxed" x-text="selectedItem.description"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+     <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
         <div class="section-divider mb-12"></div>
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
@@ -236,37 +236,20 @@
 
                 <div>
                     <h4 class="text-white font-semibold mb-4">Navigasi</h4>
-                    <ul class="space-y-3">
-                        <li><a href="index.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
-                        <li><a href="about.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
-                        <li><a href="journey.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
-                        </li>
-                        <li><a href="recycle.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
-                        </li>
-                        <li><a href="data.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
-                        <li><a href="contact.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
-                        </li>
-                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
-                                3R</a></li>
-                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
-                                Kritis</a></li>
-                        <li><a href="contact.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                        <a href="index.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a>
+                        <a href="recycle.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        <a href="about.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a>
+                        <a href="data.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a>
+                        <a href="journey.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        <a href="contact.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a>
+                    </div>
                 </div>
             </div>
 
@@ -291,7 +274,7 @@
                     {
                         id: 1,
                         wasteName: 'Karton',
-                        wasteImg: './img/koran.png',
+                        wasteImg: './img/karton.png',
                         recycledName: 'Kotak Sereal',
                         recycledImg: './img/kotaksereal.png',
                         description: 'Karton bekas dikumpulkan, dibersihkan, dan diproses ulang menjadi kemasan kotak sereal yang ramah lingkungan. Proses ini menghemat pohon dan mengurangi limbah.'
@@ -314,7 +297,7 @@
                     },
                     {
                         id: 4,
-                        wasteName: 'Kertas Bekas',
+                        wasteName: 'Koran',
                         wasteImg: './img/koran.png',
                         recycledName: 'Briket Kertas',
                         recycledImg: './img/briketkertas.png',
@@ -347,7 +330,7 @@
                     {
                         id: 8,
                         wasteName: 'Kertas',
-                        wasteImg: './img/koran.png',
+                        wasteImg: './img/kertas.png',
                         recycledName: 'Tisu Daur Ulang',
                         recycledImg: './img/tisuhasildaurulangkertas.png',
                         description: 'Kertas bekas diolah kembali melalui proses pemutihan dan pelembutan untuk menghasilkan tisu yang lembut, berkualitas, dan ramah lingkungan.'

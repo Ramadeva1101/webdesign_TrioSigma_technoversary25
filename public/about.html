@@ -22,7 +22,8 @@
     <div class="grain-overlay"></div>
 
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'"
+        style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-2 group">
@@ -59,7 +60,8 @@
                 x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
                 x-transition:leave="transition ease-in duration-150"
                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
-                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                class="md:hidden mt-4 pb-4 space-y-2 glass-panel-strong rounded-2xl p-4 border border-stone-800"
+                style="display: none;">
                 <a href="index.html"
                     class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
                 <a href="about.html" class="block py-2 text-orange-400 transition-colors">Tentang</a>
@@ -235,39 +237,39 @@
                     <div
                         class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all group text-center">
                         <div
-                            class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-2 border-orange-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                            <i data-lucide="palette" class="w-10 h-10 text-orange-400"></i>
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-2 border-orange-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
+                            <img src="./img/ken.jpg" alt="Ken" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-display font-bold text-white mb-1">Ken</h3>
                         <p class="text-orange-400 text-sm font-semibold mb-3">Design Lead</p>
                         <p class="text-stone-400 text-sm leading-relaxed">
-                            Merancang konsep visual dan estetika yang memukau untuk pengalaman pengguna yang optimal
+                            Merancang konsep visual yang memukau
                         </p>
                     </div>
 
                     <div
                         class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-emerald-500/50 transition-all group text-center">
                         <div
-                            class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border-2 border-emerald-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                            <i data-lucide="layout" class="w-10 h-10 text-emerald-400"></i>
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border-2 border-emerald-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
+                            <img src="./img/alan.jpg" alt="Alan" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-display font-bold text-white mb-1">Alan</h3>
                         <p class="text-emerald-400 text-sm font-semibold mb-3">UI/UX Designer</p>
                         <p class="text-stone-400 text-sm leading-relaxed">
-                            Menciptakan antarmuka yang intuitif dan pengalaman pengguna yang seamless dan engaging
+                            Menciptakan pengalaman pengguna yang menarik
                         </p>
                     </div>
 
                     <div
                         class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-blue-500/50 transition-all group text-center">
                         <div
-                            class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                            <i data-lucide="code-2" class="w-10 h-10 text-blue-400"></i>
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
+                            <img src="./img/ramdev.jpg" alt="Ramdev" class="w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-display font-bold text-white mb-1">Ramdev</h3>
                         <p class="text-blue-400 text-sm font-semibold mb-3">Frontend Developer</p>
                         <p class="text-stone-400 text-sm leading-relaxed">
-                            Mengimplementasikan desain menjadi kode yang bersih, responsif, dan performa tinggi
+                            Mengimplementasikan desain dengan kode yang praktis
                         </p>
                     </div>
                 </div>
@@ -278,7 +280,7 @@
     <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
         <div class="section-divider mb-12"></div>
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
@@ -309,37 +311,20 @@
 
                 <div>
                     <h4 class="text-white font-semibold mb-4">Navigasi</h4>
-                    <ul class="space-y-3">
-                        <li><a href="index.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
-                        <li><a href="about.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
-                        <li><a href="journey.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
-                        </li>
-                        <li><a href="recycle.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
-                        </li>
-                        <li><a href="data.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
-                        <li><a href="contact.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
-                        </li>
-                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
-                                3R</a></li>
-                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
-                                Kritis</a></li>
-                        <li><a href="contact.html"
-                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
-                    </ul>
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-2">
+                        <a href="index.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a>
+                        <a href="recycle.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        <a href="about.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a>
+                        <a href="data.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a>
+                        <a href="journey.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        <a href="contact.html"
+                            class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a>
+                    </div>
                 </div>
             </div>
 
