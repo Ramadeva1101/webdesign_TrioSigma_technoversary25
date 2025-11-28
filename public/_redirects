@@ -1,4 +1,4 @@
-# Netlify redirects - Remove .html extension
+
 /index.html    /index    301
 /about.html    /about    301
 /journey.html  /journey  301
@@ -6,7 +6,7 @@
 /data.html     /data     301
 /contact.html  /contact  301
 
-# Rewrite clean URLs to .html files
+
 /index         /index.html    200
 /about         /about.html    200
 /journey       /journey.html  200

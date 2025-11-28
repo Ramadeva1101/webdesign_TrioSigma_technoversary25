@@ -4,10 +4,8 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Serve static files from public directory
 app.use(express.static('public'));
 
-// Handle clean URLs - rewrite to .html
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'about.html'));
 });
@@ -32,7 +30,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Redirect .html to clean URLs
 app.get('/about.html', (req, res) => {
     res.redirect(301, '/about');
 });
@@ -58,7 +55,7 @@ app.get('/index.html', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-    console.log(`📁 Serving files from: ${path.join(__dirname, 'public')}`);
+    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Serving files from: ${path.join(__dirname, 'public')}`);
 });
 

@@ -563,15 +563,15 @@
                     delay: i * 0.3
                 })),
                 quizData: [
-                    // Quiz 0 - Kategori: 1-12 Bulan (Sampah Organik Cepat Terurai)
+
                     { q: 'Sampah organik seperti sisa sayur dapat terurai dalam waktu…', options: ['1-12 bulan', '1-5 tahun', '5-100 tahun', 'Ratusan tahun'], a: 0, explanation: 'Sampah organik seperti sisa sayur dan kulit pisang dapat terurai dalam waktu 1-12 bulan jika dikelola dengan baik melalui kompos.' },
-                    // Quiz 1 - Kategori: 1-5 Tahun (Barang Keseharian)
+
                     { q: 'Puntung rokok mencemari tanah karena mengandung…', options: ['Vitamin', 'Air bersih', 'Bahan kimia beracun', 'Tanah liat'], a: 2, explanation: 'Puntung rokok mengandung nikotin, tar, dan bahan kimia beracun yang meresap ke tanah.' },
-                    // Quiz 2 - Kategori: 5-100 Tahun (Bahan Sintetis Ringan)
+
                     { q: 'Pencemaran tanah dapat menyebabkan…', options: ['Tanah menjadi lebih subur', 'Tanaman tumbuh lebih cepat', 'Tanah kehilangan unsur hara', 'Warna tanah berubah jadi jingga'], a: 2, explanation: 'Tanah yang tercemar kehilangan unsur hara sehingga tidak lagi subur untuk tanaman.' },
-                    // Quiz 3 - Kategori: 100-1.000 Tahun (Plastik Tebal & Popok)
+
                     { q: 'Cara paling efektif mengurangi sampah plastik adalah…', options: ['Membakar plastik sembarangan', 'Menggunakan kantong belanja pakai ulang', 'Membuangnya ke sungai', 'Menimbunnya di halaman rumah'], a: 1, explanation: 'Menggunakan tas belanja ulang membantu mengurangi jumlah plastik sekali pakai.' },
-                    // Quiz 4 - Kategori: Abadi (Kaca, E-waste, Mikroplastik)
+
                     { q: 'Sampah elektronik (e-waste) berbahaya karena…', options: ['Mengandung logam berat', 'Mudah terurai', 'Tidak bisa dipakai lagi', 'Warnanya kusam'], a: 0, explanation: 'E-waste mengandung logam berat seperti merkuri dan timbal yang mencemari tanah dan air.' }
                 ],
                 currentYearLabel: '1 minggu - 12 bulan',
@@ -583,7 +583,7 @@
                     { title: '⚫ Tidak Terurai', subtitle: 'Praktis abadi', description: 'Kaca, e-waste, dan mikroplastik yang hanya pecah menjadi fragmen berbahaya.', position: 110, height: 15, color: 'rgba(161,161,170,0.4)', background: 'linear-gradient(180deg, rgba(82,82,91,0.25) 0%, rgba(63,63,70,0.15) 30%, rgba(39,39,42,0.08) 60%, transparent 100%)', timeline: 'Abadi' }
                 ],
                 wasteItems: [
-                    // 🟢 1-12 Bulan (y: 5-16) - Pola zigzag
+
                     { name: 'Sisa sayur', time: '1 minggu', category: '🟢 1 — 12 Bulan', impact: 'Jika menumpuk di TPA, pembusukan anaerob memicu gas metana.', solution: 'Pisahkan sisa dapur ke komposter atau bank sampah organik.', image: './img/sisa%20sayur.png', emoji: '🌱', accent: 'rgba(74,222,128,0.35)', x: 18, y: 5 },
                     { name: 'Kulit pisang', time: '2–4 minggu', category: '🟢 1 — 12 Bulan', impact: 'Mengundang lalat \u0026 menghasilkan bau jika bercampur sampah campur.', solution: 'Potong kecil lalu masukkan ke komposter tertutup.', image: './img/kulitpisang.png', emoji: '🍌', accent: 'rgba(74,222,128,0.35)', x: 65, y: 7 },
                     { name: 'Kertas koran', time: '6 minggu', category: '🟢 1 — 12 Bulan', impact: 'Butuh pohon baru dan tinta bisa mencemari air ketika terurai di TPA.', solution: 'Gunakan ulang sebagai pembungkus atau setor ke bank kertas.', image: './img/koran.png', emoji: '📰', accent: 'rgba(74,222,128,0.35)', x: 35, y: 9 },
@@ -592,11 +592,11 @@
                     { name: 'Tisu', time: '2–3 bulan', category: '🟢 1 — 12 Bulan', impact: 'Pemutih dan parfum di tisu bisa terbawa ke air lindi.', solution: 'Gunakan kain lap dan komposkan tisu bebas minyak.', image: './img/Tisu.png', emoji: '🧻', accent: 'rgba(74,222,128,0.35)', x: 12, y: 15 },
                     { name: 'Kain katun', time: '6–12 bulan', category: '🟢 1 — 12 Bulan', impact: 'Pewarna tekstil merembes ke tanah saat kain membusuk.', solution: 'Sumbangkan atau jadikan lap guna ulang.', image: null, emoji: '🧵', accent: 'rgba(74,222,128,0.35)', x: 75, y: 16 },
 
-                    // 🟡 1-5 Tahun (y: 22-25) - Zigzag
+
                     { name: 'Filter rokok', time: '≈5 tahun', category: '🟡 1 — 5 Tahun', impact: 'Serat selulosa asetat menyerap nikotin dan logam berat.', solution: 'Kumpulkan di wadah kecil lalu setor ke dropbox B3.', image: './img/rokok.png', emoji: '🚬', accent: 'rgba(250,204,21,0.35)', x: 28, y: 22 },
                     { name: 'Kantong plastik tipis', time: '2–3 tahun', category: '🟡 1 — 5 Tahun', impact: 'Mudah terbang ke sungai dan pecah jadi mikroplastik.', solution: 'Bawa tas kain atau keranjang sendiri.', image: './img/kresek.png', emoji: '🛍️', accent: 'rgba(250,204,21,0.35)', x: 70, y: 24 },
 
-                    // 🟠 5-100 Tahun (y: 29-42) - Pola acak
+
                     { name: 'Masker medis', time: '10–20 tahun', category: '🟠 5 — 100 Tahun', impact: 'Serat meltblown dari masker sekali pakai pecah jadi mikroplastik dan membawa residu cairan tubuh.', solution: 'Pakai masker kain berlapis bila aman, lalu kumpulkan masker medis terpisah sebelum dikirim ke dropbox limbah B3.', image: './img/masker.png', emoji: null, accent: 'rgba(249,115,22,0.35)', x: 45, y: 29 },
                     { name: 'Helm proyek plastik', time: '20–30 tahun', category: '🟠 5 — 100 Tahun', impact: 'Cangkang ABS \u0026 busa pelindung sulit terurai dan dapat pecah menjadi serpihan tajam saat dibuang.', solution: 'Gunakan ulang untuk pelatihan keselamatan atau serahkan ke bank sampah yang menerima alat keselamatan.', image: null, emoji: '🪖', accent: 'rgba(249,115,22,0.35)', x: 15, y: 31 },
                     { name: 'Plastik bungkus mie instan', time: '20–30 tahun', category: '🟠 5 — 100 Tahun', impact: 'Lapis metalized pada bungkus mie instan memantul panas matahari dan hampir tidak dapat didaur ulang.', solution: 'Bersihkan kemasan lalu kumpulkan ke dropbox plastik fleksibel atau gunakan program penukaran sampah sachet.', image: './img/mie%20instan.png', emoji: null, accent: 'rgba(249,115,22,0.35)', x: 78, y: 33 },
@@ -605,7 +605,7 @@
                     { name: 'Kaleng aluminium', time: '80–200 tahun', category: '🟠 5 — 100 Tahun', impact: 'Butuh energi besar untuk menambang bauksit baru.', solution: 'Setor ke bank sampah karena logam ini laku didaur ulang.', image: './img/botolkaleng.png', emoji: '🥫', accent: 'rgba(249,115,22,0.35)', x: 22, y: 40 },
                     { name: 'Bola karet', time: '50–70 tahun', category: '🟠 5 — 100 Tahun', impact: 'Retakan pada karet melepaskan mikro-karet saat terkena panas dan gesekan.', solution: 'Tambal atau donasikan ke komunitas olahraga agar masa pakai lebih panjang.', image: null, emoji: '⚽', accent: 'rgba(249,115,22,0.35)', x: 85, y: 42 },
 
-                    // 🔴 Ratusan-Ribuan Tahun (y: 46-64) - Pola zigzag
+
                     { name: 'Bubble wrap', time: '100–500 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Gelembung PE ringan mudah terbang ke sungai dan menyumbat saluran air.', solution: 'Gunakan ulang sebagai pelindung paket atau serahkan ke pengepul plastik lunak.', image: './img/bubble%20wrap.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 32, y: 46 },
                     { name: 'DVD/CD', time: '100–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Lapisan polycarbonate dan aluminium pada DVD/CD sangat tahan lama dan melepas logam berat saat terurai.', solution: 'Donasikan ke perpustakaan atau setor ke dropbox e-waste untuk daur ulang komponennya.', image: './img/dvd.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 72, y: 48 },
                     { name: 'Botol plastik (PET)', time: '450–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Pecah menjadi mikroplastik yang termakan plankton.', solution: 'Gunakan botol isi ulang \u0026 refill station.', image: './img/botol.png', emoji: '🥤', accent: 'rgba(248,113,113,0.35)', x: 18, y: 50 },
@@ -617,7 +617,7 @@
                     { name: 'Galon air kecil', time: '100–500 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Galon PET kecil sering dipakai ulang tanpa standar sehingga lapisan dalamnya retak dan lepas ke air.', solution: 'Isi ulang di depot resmi dan hindari membeli galon sekali pakai.', image: './img/galon.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 52, y: 63 },
                     { name: 'Spons cuci piring', time: '500+ tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Serat poliuretan spons melepas mikroplastik saat digosok dan terbawa ke saluran air.', solution: 'Beralih ke spons selulosa atau loofah dan kumpulkan spons sintetis untuk eco-brick.', image: './img/spons.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 78, y: 64 },
 
-                    // ⚫ Tidak Terurai (y: 68-80) - Pola acak, jauh dari footer
+
                     { name: 'Keramik', time: '100.000–1.000.000 tahun', category: '⚫ Tidak Terurai', impact: 'Keramik nyaris abadi dan pecahannya dapat memantulkan panas serta melukai pekerja TPA.', solution: 'Gunakan ulang sebagai media drainase, pengeras tanah, atau setorkan ke bank material.', image: './img/keramik.png', emoji: null, accent: 'rgba(161,161,170,0.35)', x: 25, y: 68 },
                     { name: 'Kaca', time: 'hingga 1 juta tahun', category: '⚫ Tidak Terurai', impact: 'Fragmen tajam melukai satwa \u0026 memantulkan panas.', solution: 'Gunakan ulang botol kaca atau setor ke pabrik kaca.', image: './img/pecahan%20kaca.png', emoji: '🪟', accent: 'rgba(161,161,170,0.35)', x: 62, y: 70 },
                     { name: 'Batu bata', time: '100.000+ tahun', category: '⚫ Tidak Terurai', impact: 'Campuran tanah liat yang sudah disinter hampir tidak bisa kembali menjadi tanah dan memakan ruang TPA.', solution: 'Manfaatkan ulang untuk bangunan kecil atau hancurkan sebagai agregat jalan.', image: null, emoji: '🧱', accent: 'rgba(161,161,170,0.35)', x: 42, y: 73 },
@@ -650,41 +650,41 @@
                     this.scrollProgress = (winScroll / height) * 100;
                     this.navScrolled = winScroll > 50;
                     
-                    // Find the correct category based on scroll progress
-                    // Calculate actual scroll position percentage
+
+
                     const scrollPercent = this.scrollProgress;
-                    let category = this.categoryMarkers[0]; // Default to first category
+                    let category = this.categoryMarkers[0];
                     
-                    // Position markers dalam timeline (0-950vh), dikonversi ke scroll progress (0-100%)
-                    // Total height = 950vh, jadi position dalam % = (position * spacingFactor) / 950 * 100
-                    // Tapi lebih mudah: gunakan position langsung sebagai persentase relatif
-                    const pos1 = (this.categoryMarkers[0].position * this.spacingFactor) / 10; // ~11.6%
-                    const pos2 = (this.categoryMarkers[1].position * this.spacingFactor) / 10; // ~49.3%
-                    const pos3 = (this.categoryMarkers[2].position * this.spacingFactor) / 10; // ~84.1%
-                    const pos4 = (this.categoryMarkers[3].position * this.spacingFactor) / 10; // ~121.8% (tapi max 100%)
-                    const pos5 = (this.categoryMarkers[4].position * this.spacingFactor) / 10; // ~159.5% (tapi max 100%)
+
+
+
+                    const pos1 = (this.categoryMarkers[0].position * this.spacingFactor) / 10;
+                    const pos2 = (this.categoryMarkers[1].position * this.spacingFactor) / 10;
+                    const pos3 = (this.categoryMarkers[2].position * this.spacingFactor) / 10;
+                    const pos4 = (this.categoryMarkers[3].position * this.spacingFactor) / 10;
+                    const pos5 = (this.categoryMarkers[4].position * this.spacingFactor) / 10;
                     
-                    // Karena scrollPercent max 100%, gunakan threshold yang lebih sederhana
+
                     if (scrollPercent >= 85) {
-                        // Area dengan item 100.000+ tahun (zona merah dan abu-abu)
+
                         if (scrollPercent >= 90) {
-                            category = this.categoryMarkers[4]; // ⚫ Tidak Terurai (Abadi) - 100.000+ tahun
+                            category = this.categoryMarkers[4];
                         } else {
-                            category = this.categoryMarkers[3]; // 🔴 Ratusan — Ribuan Tahun - 100-1.000 tahun
+                            category = this.categoryMarkers[3];
                         }
                     } else if (scrollPercent >= 60) {
-                        category = this.categoryMarkers[2]; // 🟠 5 — 100 Tahun
+                        category = this.categoryMarkers[2];
                     } else if (scrollPercent >= 35) {
-                        category = this.categoryMarkers[1]; // 🟡 1 — 5 Tahun
+                        category = this.categoryMarkers[1];
                     } else if (scrollPercent >= 10) {
-                        category = this.categoryMarkers[0]; // 🟢 1 — 12 Bulan
+                        category = this.categoryMarkers[0];
                     }
                     
                     this.yearLabel = category.timeline;
                     this.currentBackground = category.background;
                     this.currentAccent = category.color.replace('0.4)', '0.55)');
                     
-                    // Update year label based on category - simplified labels
+
                     const timelineValue = category.timeline;
                     if (timelineValue === '1‑12 Bulan' || timelineValue.includes('1‑12') || timelineValue.includes('1-12')) {
                         this.currentYearLabel = '1-12 bulan';
@@ -700,9 +700,9 @@
                         this.currentYearLabel = '1-12 bulan';
                     }
                     
-                    // Override untuk zona yang lebih spesifik berdasarkan scroll progress
+
                     if (scrollPercent >= 85) {
-                        // Zona merah (100-1.000 tahun) dan abu-abu (Abadi) - semua 100000+
+
                         this.currentYearLabel = '100000+';
                     }
                 },
