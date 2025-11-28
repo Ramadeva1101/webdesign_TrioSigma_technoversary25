@@ -54,3 +54,4 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
 
 **Dibuat untuk Lomba Web Design 2025**
 **Universitas Primakara**
+
