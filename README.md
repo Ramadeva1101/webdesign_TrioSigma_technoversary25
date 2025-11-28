@@ -39,12 +39,18 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
 
 3. **Jalankan Development Server**
    ```bash
-   npm run dev
+   npm start
    ```
+   Server akan berjalan di `http://localhost:3000`
 
 4. **Buka di Browser**
    
-   Buka file `public/index.html` di browser
+   Buka `http://localhost:3000` di browser
+   
+   **Catatan:** Routing tanpa ekstensi `.html` (clean URLs) akan bekerja dengan baik, contoh:
+   - `http://localhost:3000/about` (bukan `about.html`)
+   - `http://localhost:3000/journey` (bukan `journey.html`)
+   - `http://localhost:3000/recycle` (bukan `recycle.html`)
 
 **Dibuat untuk Lomba Web Design 2025**
 **Universitas Primakara**
