@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia — Tentang</title>
+    <link rel="stylesheet" href="./assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-stone-950 text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden"
+    x-data="{ navOpen: false, navScrolled: false, updateScroll() { const winScroll = document.body.scrollTop || document.documentElement.scrollTop; this.navScrolled = winScroll > 50; } }"
+    x-init="updateScroll()" @scroll.window="updateScroll()">
+
+    <div class="grain-overlay"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain">
+                    <span
+                        class="font-display text-base md:text-lg font-semibold text-white group-hover:text-orange-400 transition-colors">
+                        Trash<span class="text-emerald-400">Pedia</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                    <a href="about.html" class="text-sm font-medium text-orange-400 transition-colors">Tentang</a>
+                    <a href="journey.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                    <a href="recycle.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Daur
+                        Ulang</a>
+                    <a href="data.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                    <a href="contact.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+                </div>
+
+                <button @click="navOpen = !navOpen" class="md:hidden text-stone-300 hover:text-white">
+                    <i x-show="!navOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="navOpen" data-lucide="x" class="w-6 h-6" style="display: none;"></i>
+                </button>
+            </div>
+
+            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                <a href="index.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                <a href="about.html" class="block py-2 text-orange-400 transition-colors">Tentang</a>
+                <a href="journey.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                <a href="recycle.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Daur
+                    Ulang</a>
+                <a href="data.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                <a href="contact.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-24 px-6 bg-gradient-to-b from-stone-950 to-black relative min-h-screen">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/10 border border-orange-500/30 mb-6">
+                    <i data-lucide="info" class="w-5 h-5 text-orange-400"></i>
+                    <span class="text-orange-400 text-sm font-semibold uppercase tracking-wider">Tentang
+                        TrashPedia</span>
+                </div>
+                <h1 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6">
+                    Ekspedisi <span class="text-gradient">Interaktif</span> Sampah
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed">
+                    Memahami perjalanan sampah dari tangan kita hingga ke lapisan terdalam bumi
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <div class="glass-panel-strong p-8 rounded-3xl border border-orange-500/20">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center">
+                            <i data-lucide="target" class="w-7 h-7 text-orange-400"></i>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-white">Tujuan Project</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-stone-300 leading-relaxed">
+                            TrashPedia hadir untuk memberikan <span class="text-orange-400 font-semibold">edukasi
+                                visual dan interaktif</span> tentang dampak sampah terhadap lingkungan. Kami percaya
+                            bahwa pemahaman yang mendalam akan mendorong perubahan perilaku.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-stone-300 text-sm">Meningkatkan kesadaran masyarakat tentang lama waktu
+                                    dekomposisi sampah</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-stone-300 text-sm">Memberikan visualisasi nyata perjalanan sampah di
+                                    lapisan bumi</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"></i>
+                                <p class="text-stone-300 text-sm">Menginspirasi aksi nyata dalam pengelolaan sampah
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel-strong p-8 rounded-3xl border border-emerald-500/20">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 flex items-center justify-center">
+                            <i data-lucide="eye" class="w-7 h-7 text-emerald-400"></i>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-white">Visi Kami</h2>
+                    </div>
+                    <p class="text-stone-300 leading-relaxed mb-6">
+                        Menjadi platform edukasi lingkungan terdepan yang mengubah cara masyarakat memandang dan
+                        mengelola sampah melalui teknologi interaktif.
+                    </p>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 flex items-center justify-center">
+                            <i data-lucide="compass" class="w-7 h-7 text-blue-400"></i>
+                        </div>
+                        <h2 class="text-2xl font-display font-bold text-white">Misi Kami</h2>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-400 font-bold">1.</span>
+                            <p class="text-stone-300 text-sm">Menyajikan data dan fakta sampah dengan cara yang menarik
+                                dan mudah dipahami</p>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-400 font-bold">2.</span>
+                            <p class="text-stone-300 text-sm">Mendorong partisipasi aktif dalam program daur ulang dan
+                                pengurangan sampah</p>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-400 font-bold">3.</span>
+                            <p class="text-stone-300 text-sm">Membangun komunitas peduli lingkungan yang berkelanjutan
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel-strong p-8 md:p-12 rounded-3xl border border-purple-500/20 mb-16">
+                <div class="text-center mb-10">
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex items-center justify-center">
+                            <i data-lucide="lightbulb" class="w-7 h-7 text-purple-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-display font-bold text-white">Fitur Utama</h2>
+                    </div>
+                    <p class="text-stone-400 max-w-2xl mx-auto">
+                        Pengalaman interaktif yang dirancang untuk memberikan pemahaman mendalam
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-purple-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="map" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Journey Interaktif</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Jelajahi perjalanan sampah dari permukaan hingga ke lapisan terdalam bumi dengan visualisasi
+                            yang memukau
+                        </p>
+                    </div>
+
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-purple-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Data Real-Time</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Statistik dan data terkini tentang sampah di Indonesia dengan visualisasi chart yang
+                            informatif
+                        </p>
+                    </div>
+
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-purple-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                            <i data-lucide="recycle" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-white mb-2">Panduan Daur Ulang</h3>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Lihat transformasi sampah menjadi produk berguna dengan contoh nyata dan proses yang jelas
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel-strong p-8 md:p-12 rounded-3xl border border-orange-500/20">
+                <div class="text-center mb-10">
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center">
+                            <i data-lucide="users" class="w-7 h-7 text-orange-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-display font-bold text-white">Tim Kami</h2>
+                    </div>
+                    <p class="text-stone-400 max-w-2xl mx-auto">
+                        Kolaborasi talenta muda yang berdedikasi untuk lingkungan
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/20 border-2 border-orange-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="palette" class="w-10 h-10 text-orange-400"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-1">Ken</h3>
+                        <p class="text-orange-400 text-sm font-semibold mb-3">Design Lead</p>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Merancang konsep visual dan estetika yang memukau untuk pengalaman pengguna yang optimal
+                        </p>
+                    </div>
+
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-emerald-500/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border-2 border-emerald-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="layout" class="w-10 h-10 text-emerald-400"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-1">Alan</h3>
+                        <p class="text-emerald-400 text-sm font-semibold mb-3">UI/UX Designer</p>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Menciptakan antarmuka yang intuitif dan pengalaman pengguna yang seamless dan engaging
+                        </p>
+                    </div>
+
+                    <div
+                        class="glass-panel p-6 rounded-2xl border border-stone-800 hover:border-blue-500/50 transition-all group text-center">
+                        <div
+                            class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-500/30 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="code-2" class="w-10 h-10 text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-1">Ramdev</h3>
+                        <p class="text-blue-400 text-sm font-semibold mb-3">Frontend Developer</p>
+                        <p class="text-stone-400 text-sm leading-relaxed">
+                            Mengimplementasikan desain menjadi kode yang bersih, responsif, dan performa tinggi
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                                class="w-full h-full object-contain p-1">
+                        </div>
+                        <span class="font-display text-xl font-semibold text-white">Trash<span
+                                class="text-emerald-400">Pedia</span></span>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-6">
+                        Ekspedisi interaktif untuk memahami nasib sampah kita dan dampaknya terhadap bumi.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
+                        <li><a href="about.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
+                        <li><a href="journey.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        </li>
+                        <li><a href="recycle.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        </li>
+                        <li><a href="data.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
+                        </li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
+                                3R</a></li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
+                                Kritis</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-600 text-sm">© 2025 All rights reserved.</p>
+                <div class="flex gap-6 text-stone-600 text-xs">
+                    <a href="#" class="hover:text-stone-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-stone-400 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            lucide.createIcons();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia — Data & Statistik</title>
+    <link rel="stylesheet" href="./assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-black text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden" x-data="{
+          navOpen: false,
+          navScrolled: false,
+          updateScroll() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            this.navScrolled = winScroll > 50;
+          }
+      }" x-init="updateScroll()" @scroll.window="updateScroll()">
+
+    <div class="grain-overlay"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain">
+                    <span
+                        class="font-display text-base md:text-lg font-semibold text-white group-hover:text-orange-400 transition-colors">
+                        Trash<span class="text-emerald-400">Pedia</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                    <a href="about.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                    <a href="journey.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                    <a href="recycle.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Daur
+                        Ulang</a>
+                    <a href="data.html" class="text-sm font-medium text-orange-400 transition-colors">Data</a>
+                    <a href="contact.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+                </div>
+
+                <button @click="navOpen = !navOpen" class="md:hidden text-stone-300 hover:text-white">
+                    <i x-show="!navOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="navOpen" data-lucide="x" class="w-6 h-6" style="display: none;"></i>
+                </button>
+            </div>
+
+            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                <a href="index.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                <a href="about.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                <a href="journey.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                <a href="recycle.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Daur
+                    Ulang</a>
+                <a href="data.html" class="block py-2 text-orange-400 transition-colors">Data</a>
+                <a href="contact.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6 relative z-10">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20" x-data="{ show: false }" x-intersect="show = true">
+                <span
+                    class="inline-block px-4 py-2 rounded-full glass-panel text-orange-400 text-sm font-medium mb-6 transition-all duration-1000 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Data & Statistik
+                </span>
+                <h1 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 transition-all duration-1000 delay-200 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Realitas <span class="text-gradient">Pencemaran</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-300 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Data aktual yang menunjukkan kondisi pencemaran sampah plastik di Indonesia serta aksi yang bisa
+                    kita lakukan.
+                </p>
+            </div>
+
+            <div class="mb-20" x-data="{ show: false }" x-intersect="show = true">
+                <div class="glass-panel-strong p-8 rounded-2xl border border-stone-800 transition-all duration-1000 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-2xl font-display font-semibold text-white mb-2">Sampah Plastik di Indonesia
+                            </h2>
+                            <p class="text-stone-400 text-sm">Statistik dalam Juta Ton (2018-2024)</p>
+                        </div>
+                        <div
+                            class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-orange-400"></i>
+                            <span class="text-orange-400 text-sm font-semibold">+72%</span>
+                        </div>
+                    </div>
+                    <div class="h-[400px]">
+                        <canvas id="wasteChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Combined Pie Charts -->
+            <div class="mb-20" x-data="{ show: false }" x-intersect="show = true">
+                <div class="glass-panel-strong p-8 rounded-2xl border border-stone-800 transition-all duration-1000 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-display font-semibold text-white mb-2">Komposisi Sampah di Indonesia
+                        </h2>
+                        <p class="text-stone-400 text-sm">Distribusi berdasarkan jenis dan sumber sampah</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Komposisi Berdasarkan Jenis -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4 text-center">Berdasarkan Jenis Sampah</h3>
+                            <div class="h-[350px]">
+                                <canvas id="wasteCompositionChart"></canvas>
+                            </div>
+                        </div>
+                        <!-- Komposisi Berdasarkan Sumber -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-4 text-center">Berdasarkan Sumber Sampah</h3>
+                            <div class="h-[350px]">
+                                <canvas id="wasteSourceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Komunitas Lingkungan Carousel -->
+            <div class="mb-20" x-data="{ show: false }" x-intersect="show = true">
+                <div class="transition-all duration-1000 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
+                    <div class="text-center mb-12">
+                        <h2 class="text-2xl md:text-3xl font-display font-semibold text-white mb-3">Komunitas Lingkungan
+                        </h2>
+                        <p class="text-stone-400 text-sm md:text-base">Organisasi yang aktif dalam pelestarian
+                            lingkungan</p>
+                    </div>
+
+                    <!-- Carousel Container -->
+                    <div class="relative">
+                        <div class="overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4" id="communityCarousel">
+                            <div class="flex gap-6 px-4">
+                                <!-- Card 1: Pandawara Group -->
+                                <div
+                                    class="glass-panel-strong p-6 rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 min-w-[320px] md:min-w-[380px] snap-start">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl border-2 border-orange-500 flex items-center justify-center text-orange-500 font-bold text-lg">
+                                            P
+                                        </div>
+                                        <div>
+                                            <h3 class="text-white font-semibold text-lg">Pandawara Group</h3>
+                                            <p class="text-stone-500 text-xs">Aksi Nyata Generasi Muda</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-stone-300 text-sm mb-4 leading-relaxed">
+                                        Komunitas anak muda yang membersihkan sungai, pantai, dan area publik. Aksi
+                                        mereka langsung dan mudah ditiru, sangat menginspirasi generasi muda.
+                                    </p>
+                                    <div class="flex items-center gap-2 text-orange-400 text-sm">
+                                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                                        <span>@pandawaragroup</span>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Greenpeace Indonesia -->
+                                <div
+                                    class="glass-panel-strong p-6 rounded-2xl border border-stone-800 hover:border-emerald-500/50 transition-all duration-300 min-w-[320px] md:min-w-[380px] snap-start">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl border-2 border-emerald-500 flex items-center justify-center text-emerald-500 font-bold text-lg">
+                                            G
+                                        </div>
+                                        <div>
+                                            <h3 class="text-white font-semibold text-lg">Greenpeace Indonesia</h3>
+                                            <p class="text-stone-500 text-xs">Advokasi Lingkungan Global</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-stone-300 text-sm mb-4 leading-relaxed">
+                                        Organisasi internasional yang sangat aktif dalam advokasi lingkungan: perubahan
+                                        iklim, deforestasi, energi terbarukan, dan perlindungan laut.
+                                    </p>
+                                    <a href="https://www.greenpeace.org/indonesia/" target="_blank"
+                                        class="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-sm font-medium group/link">
+                                        <span>Kunjungi Website</span>
+                                        <i data-lucide="external-link"
+                                            class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+
+                                <!-- Card 3: BISA Indonesia -->
+                                <div
+                                    class="glass-panel-strong p-6 rounded-2xl border border-stone-800 hover:border-blue-500/50 transition-all duration-300 min-w-[320px] md:min-w-[380px] snap-start">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl border-2 border-blue-500 flex items-center justify-center text-blue-500 font-bold text-lg">
+                                            B
+                                        </div>
+                                        <div>
+                                            <h3 class="text-white font-semibold text-lg">BISA Indonesia</h3>
+                                            <p class="text-stone-500 text-xs">Konservasi Berbasis Ilmu</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-stone-300 text-sm mb-4 leading-relaxed">
+                                        NGO konservasi berbasis ilmu pengetahuan dan pemberdayaan masyarakat. Fokus pada
+                                        biodiversitas, riset satwa liar, dan edukasi lingkungan.
+                                    </p>
+                                    <a href="https://bisaindonesia.or.id/" target="_blank"
+                                        class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium group/link">
+                                        <span>Kunjungi Website</span>
+                                        <i data-lucide="external-link"
+                                            class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+
+                                <!-- Card 4: WWF Indonesia -->
+                                <div
+                                    class="glass-panel-strong p-6 rounded-2xl border border-stone-800 hover:border-purple-500/50 transition-all duration-300 min-w-[320px] md:min-w-[380px] snap-start">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl border-2 border-purple-500 flex items-center justify-center text-purple-500 font-bold text-lg">
+                                            W
+                                        </div>
+                                        <div>
+                                            <h3 class="text-white font-semibold text-lg">WWF-Indonesia</h3>
+                                            <p class="text-stone-500 text-xs">Konservasi Satwa & Hutan</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-stone-300 text-sm mb-4 leading-relaxed">
+                                        Organisasi konservasi terbesar di dunia, aktif di Indonesia dalam perlindungan
+                                        satwa (orangutan, harimau), laut, hutan, dan mitigasi perubahan iklim.
+                                    </p>
+                                    <a href="https://www.wwf.or.id/" target="_blank"
+                                        class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm font-medium group/link">
+                                        <span>Kunjungi Website</span>
+                                        <i data-lucide="external-link"
+                                            class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+
+                                <!-- Card 5: Zero Waste Indonesia -->
+                                <div
+                                    class="glass-panel-strong p-6 rounded-2xl border border-stone-800 hover:border-yellow-500/50 transition-all duration-300 min-w-[320px] md:min-w-[380px] snap-start">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div
+                                            class="w-12 h-12 rounded-xl border-2 border-yellow-500 flex items-center justify-center text-yellow-500 font-bold text-lg">
+                                            Z
+                                        </div>
+                                        <div>
+                                            <h3 class="text-white font-semibold text-lg">Zero Waste Indonesia</h3>
+                                            <p class="text-stone-500 text-xs">Gaya Hidup Minim Limbah</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-stone-300 text-sm mb-4 leading-relaxed">
+                                        Komunitas nasional yang fokus pada edukasi pengurangan sampah, gaya hidup minim
+                                        limbah, kampanye bebas plastik, dan aksi komunitas.
+                                    </p>
+                                    <a href="https://zerowaste.id/" target="_blank"
+                                        class="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 text-sm font-medium group/link">
+                                        <span>Kunjungi Website</span>
+                                        <i data-lucide="external-link"
+                                            class="w-4 h-4 group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                                class="w-full h-full object-contain p-1">
+                        </div>
+                        <span class="font-display text-xl font-semibold text-white">Trash<span
+                                class="text-emerald-400">Pedia</span></span>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-6">
+                        Ekspedisi interaktif untuk memahami nasib sampah kita dan dampaknya terhadap bumi.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
+                        <li><a href="about.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
+                        <li><a href="journey.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        </li>
+                        <li><a href="recycle.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        </li>
+                        <li><a href="data.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
+                        </li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
+                                3R</a></li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
+                                Kritis</a></li>
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-600 text-sm">© 2025 All rights reserved.</p>
+                <div class="flex gap-6 text-stone-600 text-xs">
+                    <a href="#" class="hover:text-stone-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-stone-400 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const ctx = document.getElementById('wasteChart');
+            if (ctx) {
+                const chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                        datasets: [{
+                            label: 'Timbulan Sampah (Juta Ton)',
+                            data: [27.62, 27.59, 28.46, 37.67, 56.63, 33.79],
+                            borderColor: '#f97316',
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#0c0c0c',
+                            pointBorderColor: '#f97316',
+                            pointBorderWidth: 2,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: '#d6d3d1',
+                                    font: { size: 14 }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#0c0c0c',
+                                borderColor: '#44403c',
+                                borderWidth: 1,
+                                titleColor: '#fff',
+                                bodyColor: '#a8a29e',
+                                padding: 12,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' juta ton';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                grid: { color: '#292524' },
+                                border: { display: false },
+                                ticks: {
+                                    color: '#a8a29e',
+                                    callback: function (value) {
+                                        return value + ' jt';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: { display: false },
+                                border: { display: false },
+                                ticks: { color: '#a8a29e' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Waste Composition by Type Chart
+            const compositionCtx = document.getElementById('wasteCompositionChart');
+            if (compositionCtx) {
+                new Chart(compositionCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Sisa Makanan', 'Kayu/Ranting', 'Kertas/Karton', 'Plastik', 'Logam', 'Kain', 'Karet/Kulit', 'Kaca', 'Lainnya'],
+                        datasets: [{
+                            data: [38.29, 13.18, 11.11, 19.47, 3.25, 2.63, 2.1, 2.37, 7.6],
+                            backgroundColor: [
+                                '#3b82f6', // Blue - Sisa Makanan
+                                '#10b981', // Green - Kayu/Ranting
+                                '#f59e0b', // Yellow - Kertas/Karton
+                                '#ef4444', // Red - Plastik
+                                '#06b6d4', // Cyan - Logam
+                                '#8b5cf6', // Purple - Kain
+                                '#f97316', // Orange - Karet/Kulit
+                                '#a855f7', // Purple - Kaca
+                                '#ec4899'  // Pink - Lainnya
+                            ],
+                            borderColor: '#0c0a09',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: '#d6d3d1',
+                                    padding: 15,
+                                    font: { size: 12 }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#0c0c0c',
+                                borderColor: '#44403c',
+                                borderWidth: 1,
+                                titleColor: '#fff',
+                                bodyColor: '#a8a29e',
+                                padding: 12,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Waste Source Chart
+            const sourceCtx = document.getElementById('wasteSourceChart');
+            if (sourceCtx) {
+                new Chart(sourceCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Rumah Tangga', 'Perkantoran', 'Perniagaan', 'Pasar', 'Fasilitas Publik', 'Kawasan', 'Lain'],
+                        datasets: [{
+                            data: [46.8, 5.82, 13.54, 14.76, 3.6, 14.04, 1.44],
+                            backgroundColor: [
+                                '#3b82f6', // Blue - Rumah Tangga
+                                '#f59e0b', // Yellow - Perkantoran
+                                '#fbbf24', // Light Yellow - Perniagaan
+                                '#ef4444', // Red - Pasar
+                                '#06b6d4', // Cyan - Fasilitas Publik
+                                '#10b981', // Green - Kawasan
+                                '#f97316'  // Orange - Lain
+                            ],
+                            borderColor: '#0c0a09',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: '#d6d3d1',
+                                    padding: 15,
+                                    font: { size: 12 }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: '#0c0c0c',
+                                borderColor: '#44403c',
+                                borderWidth: 1,
+                                titleColor: '#fff',
+                                bodyColor: '#a8a29e',
+                                padding: 12,
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

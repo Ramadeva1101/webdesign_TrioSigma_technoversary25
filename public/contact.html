@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia — Kontak</title>
+    <link rel="stylesheet" href="./assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-stone-950 text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden"
+    x-data="{
+          navOpen: false,
+          navScrolled: false,
+          formData: { name: '', email: '', subject: '', message: '' },
+          showSuccess: false,
+          updateScroll() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            this.navScrolled = winScroll > 50;
+          },
+          submitForm() {
+            if (this.formData.name && this.formData.email && this.formData.subject && this.formData.message) {
+              this.showSuccess = true;
+              this.formData = { name: '', email: '', subject: '', message: '' };
+              setTimeout(() => { this.showSuccess = false; }, 5000);
+            }
+          }
+      }" x-init="updateScroll()" @scroll.window="updateScroll()">
+
+    <div class="grain-overlay"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain">
+                    <span
+                        class="font-display text-base md:text-lg font-semibold text-white group-hover:text-orange-400 transition-colors">
+                        Trash<span class="text-emerald-400">Pedia</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                    <a href="about.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                    <a href="journey.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                    <a href="recycle.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Daur
+                        Ulang</a>
+                    <a href="data.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                    <a href="contact.html" class="text-sm font-medium text-orange-400 transition-colors">Kontak</a>
+                </div>
+
+                <button @click="navOpen = !navOpen" class="md:hidden text-stone-300 hover:text-white">
+                    <i x-show="!navOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="navOpen" data-lucide="x" class="w-6 h-6" style="display: none;"></i>
+                </button>
+            </div>
+
+            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                <a href="index.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                <a href="about.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                <a href="journey.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                <a href="recycle.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Daur
+                    Ulang</a>
+                <a href="data.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                <a href="contact.html" class="block py-2 text-orange-400 transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-24 px-6 bg-stone-950 relative">
+        <div class="section-divider"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20" x-data="{ show: false }" x-intersect="show = true">
+                <span
+                    class="inline-block px-4 py-2 rounded-full glass-panel text-orange-400 text-sm font-medium mb-6 transition-all duration-1000 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Hubungi Kami
+                </span>
+                <h1 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 transition-all duration-1000 delay-200 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Mari <span class="text-gradient">Terhubung</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-stone-400 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-300 transform"
+                    :class="show ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'">
+                    Punya pertanyaan, saran, atau ingin berkolaborasi? Kami siap mendengarkan Anda.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Contact Form -->
+                <div class="space-y-6" x-data="{ show: false }" x-intersect="show = true">
+                    <div class="glass-panel-strong p-8 rounded-2xl transition-all duration-1000 transform"
+                        :class="show ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center">
+                                <i data-lucide="send" class="w-6 h-6 text-orange-400"></i>
+                            </div>
+                            <h2 class="text-2xl font-display font-semibold text-white">Kirim Pesan</h2>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div x-show="showSuccess" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
+                            class="mb-6 p-4 rounded-xl bg-emerald-500/20 border-2 border-emerald-500/50"
+                            style="display: none;">
+                            <div class="flex items-center gap-2 text-emerald-300">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                <p class="font-semibold">Pesan berhasil dikirim! Kami akan segera merespons.</p>
+                            </div>
+                        </div>
+
+                        <form @submit.prevent="submitForm()" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-stone-300 mb-2">Nama</label>
+                                <input type="text" id="name" x-model="formData.name" required
+                                    class="w-full px-4 py-3 rounded-xl bg-stone-900/50 border border-stone-700 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all"
+                                    placeholder="Nama Anda">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-stone-300 mb-2">Email</label>
+                                <input type="email" id="email" x-model="formData.email" required
+                                    class="w-full px-4 py-3 rounded-xl bg-stone-900/50 border border-stone-700 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all"
+                                    placeholder="email@example.com">
+                            </div>
+
+                            <div>
+                                <label for="subject"
+                                    class="block text-sm font-medium text-stone-300 mb-2">Subjek</label>
+                                <input type="text" id="subject" x-model="formData.subject" required
+                                    class="w-full px-4 py-3 rounded-xl bg-stone-900/50 border border-stone-700 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all"
+                                    placeholder="Topik pesan Anda">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-stone-300 mb-2">Pesan</label>
+                                <textarea id="message" x-model="formData.message" required rows="5"
+                                    class="w-full px-4 py-3 rounded-xl bg-stone-900/50 border border-stone-700 text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-orange-500/50 transition-all resize-none"
+                                    placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-400 hover:to-orange-500 transition-all shadow-lg hover:shadow-orange-500/50 flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                <span>Kirim Pesan</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-6" x-data="{ show: false }" x-intersect="show = true">
+                    <div class="mb-8">
+                        <h3
+                            class="text-sm font-semibold text-stone-500 uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            Informasi Kontak
+                        </h3>
+                        <p class="text-stone-400 text-sm">Jangan ragu untuk menghubungi kami melalui berbagai saluran
+                            berikut.</p>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div class="glass-panel-strong p-6 rounded-xl hover:bg-white/5 hover:border-orange-500/30 transition-all duration-300 group"
+                        :class="show ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="mail" class="w-6 h-6 text-orange-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-white font-semibold mb-2">Email</h4>
+                                <p class="text-stone-400 text-sm mb-2">Kirim email kepada kami</p>
+                                <a href="mailto:contact@trashpedia.com"
+                                    class="text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors">
+                                    contact@trashpedia.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Card -->
+                    <div class="glass-panel-strong p-6 rounded-xl hover:bg-white/5 hover:border-orange-500/30 transition-all duration-300 group"
+                        :class="show ? 'translate-x-0 opacity-100 delay-100' : 'translate-x-10 opacity-0'">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="share-2" class="w-6 h-6 text-emerald-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-white font-semibold mb-2">Media Sosial</h4>
+                                <p class="text-stone-400 text-sm mb-3">Ikuti kami di platform sosial</p>
+                                <div class="flex gap-3">
+                                    <a href="#"
+                                        class="w-9 h-9 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                                        <i data-lucide="twitter" class="w-4 h-4"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-9 h-9 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-9 h-9 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                                        <i data-lucide="github" class="w-4 h-4"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-9 h-9 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                                        <i data-lucide="linkedin" class="w-4 h-4"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="glass-panel-strong p-6 rounded-xl hover:bg-white/5 hover:border-orange-500/30 transition-all duration-300 group"
+                        :class="show ? 'translate-x-0 opacity-100 delay-200' : 'translate-x-10 opacity-0'">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-white font-semibold mb-2">Lokasi</h4>
+                                <p class="text-stone-400 text-sm">
+                                    Jakarta, Indonesia<br>
+                                    <span class="text-xs text-stone-500">Waste Awareness Initiative HQ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                                class="w-full h-full object-contain p-1">
+                        </div>
+                        <span class="font-display text-xl font-semibold text-white">Trash<span
+                                class="text-emerald-400">Pedia</span></span>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-6">
+                        Ekspedisi interaktif untuk memahami nasib sampah kita dan dampaknya terhadap bumi.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
+                        <li><a href="about.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
+                        <li><a href="journey.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        </li>
+                        <li><a href="recycle.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        </li>
+                        <li><a href="data.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
+                        </li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
+                                3R</a></li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
+                                Kritis</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-600 text-sm">© 2025 All rights reserved.</p>
+                <div class="flex gap-6 text-stone-600 text-xs">
+                    <a href="#" class="hover:text-stone-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-stone-400 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #fdba74 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.3;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+        }
+    </style>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            lucide.createIcons();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

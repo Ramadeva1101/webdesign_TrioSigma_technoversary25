@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia — Daur Ulang</title>
+    <link rel="stylesheet" href="./assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.3;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-stone-950 text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden"
+    x-data="recycleData()"
+    x-effect="if(modalOpen) { document.body.style.overflow = 'hidden'; } else { document.body.style.overflow = ''; }">
+
+    <div class="grain-overlay"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain">
+                    <span
+                        class="font-display text-base md:text-lg font-semibold text-white group-hover:text-orange-400 transition-colors">
+                        Trash<span class="text-emerald-400">Pedia</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                    <a href="about.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                    <a href="journey.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                    <a href="recycle.html" class="text-sm font-medium text-orange-400 transition-colors">Daur Ulang</a>
+                    <a href="data.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                    <a href="contact.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+                </div>
+
+                <button @click="navOpen = !navOpen" class="md:hidden text-stone-300 hover:text-white">
+                    <i x-show="!navOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="navOpen" data-lucide="x" class="w-6 h-6" style="display: none;"></i>
+                </button>
+            </div>
+
+            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                <a href="index.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                <a href="about.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                <a href="journey.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Ekspedisi</a>
+                <a href="recycle.html" class="block py-2 text-orange-400 transition-colors">Daur Ulang</a>
+                <a href="data.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                <a href="contact.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-24 px-6 min-h-screen bg-gradient-to-b from-stone-950 to-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 mb-6">
+                    <i data-lucide="recycle" class="w-5 h-5 text-emerald-400"></i>
+                    <p class="text-sm uppercase tracking-wider text-emerald-400 font-semibold">Transformasi Sampah</p>
+                </div>
+                <h1 class="font-display text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4">
+                    Dari Sampah Menjadi <span class="text-gradient">Berkah</span>
+                </h1>
+                <p class="text-stone-400 max-w-3xl mx-auto text-base sm:text-lg">
+                    Klik setiap kartu untuk melihat bagaimana sampah dapat berubah menjadi produk berguna
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                <template x-for="item in items" :key="item.id">
+                    <div @click="openModal(item)"
+                        class="glass-panel-strong rounded-2xl p-4 md:p-6 border border-stone-800 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer group">
+                        <div class="relative mb-4">
+                            <img :src="item.wasteImg" :alt="item.wasteName"
+                                class="w-full h-32 md:h-40 object-contain group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center">
+                                <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-400"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-base md:text-lg font-display font-bold text-white mb-1 text-center"
+                            x-text="item.wasteName"></h3>
+                        <p class="text-stone-500 text-xs text-center">Klik untuk lihat hasil</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <div x-show="modalOpen" x-transition:enter="transition duration-300 ease-out" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition duration-200 ease-in"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        @click="closeModal()" style="display: none;">
+        <div x-show="modalOpen" x-transition:enter="transition duration-300 ease-out delay-100"
+            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition duration-200 ease-in" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
+            class="glass-panel-strong rounded-3xl max-w-4xl w-full border border-emerald-500/30 overflow-hidden"
+            @click.stop>
+            <div class="relative">
+                <button @click="closeModal()"
+                    class="absolute top-4 right-4 z-10 w-10 h-10 rounded-xl bg-stone-900/80 border border-stone-700 flex items-center justify-center text-stone-400 hover:text-white hover:bg-stone-800 transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <div class="p-6 md:p-10">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="text-center">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/40 mb-4">
+                                <i data-lucide="trash-2" class="w-4 h-4 text-red-400"></i>
+                                <span class="text-red-400 text-sm font-semibold">Sebelum</span>
+                            </div>
+                            <div class="glass-panel rounded-2xl p-6 border border-stone-800 mb-4">
+                                <img :src="selectedItem.wasteImg" :alt="selectedItem.wasteName"
+                                    class="w-full h-48 object-contain">
+                            </div>
+                            <h3 class="text-2xl font-display font-bold text-white" x-text="selectedItem.wasteName">
+                            </h3>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 mb-4">
+                                <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+                                <span class="text-emerald-400 text-sm font-semibold">Sesudah</span>
+                            </div>
+                            <div class="glass-panel rounded-2xl p-6 border border-stone-800 mb-4">
+                                <img :src="selectedItem.recycledImg" :alt="selectedItem.recycledName"
+                                    class="w-full h-48 object-contain">
+                            </div>
+                            <h3 class="text-2xl font-display font-bold text-emerald-400"
+                                x-text="selectedItem.recycledName"></h3>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 border border-blue-500/30">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i data-lucide="info" class="w-5 h-5 text-blue-400"></i>
+                            <h4 class="text-lg font-display font-bold text-blue-400">Proses Daur Ulang</h4>
+                        </div>
+                        <p class="text-stone-300 leading-relaxed" x-text="selectedItem.description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                                class="w-full h-full object-contain p-1">
+                        </div>
+                        <span class="font-display text-xl font-semibold text-white">Trash<span
+                                class="text-emerald-400">Pedia</span></span>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-6">
+                        Ekspedisi interaktif untuk memahami nasib sampah kita dan dampaknya terhadap bumi.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
+                        <li><a href="about.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
+                        <li><a href="journey.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        </li>
+                        <li><a href="recycle.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        </li>
+                        <li><a href="data.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
+                        </li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
+                                3R</a></li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
+                                Kritis</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-600 text-sm">© 2025 All rights reserved.</p>
+                <div class="flex gap-6 text-stone-600 text-xs">
+                    <a href="#" class="hover:text-stone-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-stone-400 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function recycleData() {
+            return {
+                navOpen: false,
+                navScrolled: false,
+                modalOpen: false,
+                selectedItem: {},
+                items: [
+                    {
+                        id: 1,
+                        wasteName: 'Karton',
+                        wasteImg: './img/koran.png',
+                        recycledName: 'Kotak Sereal',
+                        recycledImg: './img/kotaksereal.png',
+                        description: 'Karton bekas dikumpulkan, dibersihkan, dan diproses ulang menjadi kemasan kotak sereal yang ramah lingkungan. Proses ini menghemat pohon dan mengurangi limbah.'
+                    },
+                    {
+                        id: 2,
+                        wasteName: 'Filter Rokok',
+                        wasteImg: './img/rokok.png',
+                        recycledName: 'Silicon Fiber',
+                        recycledImg: './img/siliconfiber.png',
+                        description: 'Filter rokok bekas diproses dengan teknologi khusus untuk mengekstrak serat silicon yang dapat digunakan sebagai isian bantal yang lembut dan higienis.'
+                    },
+                    {
+                        id: 3,
+                        wasteName: 'Ban Bekas',
+                        wasteImg: './img/ban.png',
+                        recycledName: 'Kursi Ban',
+                        recycledImg: './img/kursiban.png',
+                        description: 'Ban bekas yang sudah tidak layak pakai dibersihkan dan dikreasikan menjadi kursi unik dengan nilai seni tinggi. Produk ini tahan lama dan ramah lingkungan.'
+                    },
+                    {
+                        id: 4,
+                        wasteName: 'Kertas Bekas',
+                        wasteImg: './img/koran.png',
+                        recycledName: 'Briket Kertas',
+                        recycledImg: './img/briketkertas.png',
+                        description: 'Kertas bekas direndam, dihaluskan, dan dipadatkan menjadi briket yang dapat digunakan sebagai bahan bakar alternatif yang lebih ramah lingkungan.'
+                    },
+                    {
+                        id: 5,
+                        wasteName: 'Pecahan Kaca',
+                        wasteImg: './img/pecahan kaca.png',
+                        recycledName: 'Balok Kaca',
+                        recycledImg: './img/balokkaca.png',
+                        description: 'Pecahan kaca dikumpulkan, dileburkan pada suhu tinggi, dan dibentuk menjadi bata atau balok kaca yang dapat digunakan untuk material konstruksi modern.'
+                    },
+                    {
+                        id: 6,
+                        wasteName: 'Kabel Bekas',
+                        wasteImg: './img/kabel.png',
+                        recycledName: 'Gelang Kabel',
+                        recycledImg: './img/gelangkabel.png',
+                        description: 'Kabel bekas dengan warna-warni menarik dikreasikan menjadi gelang dan aksesoris fashion yang unik, memberikan nilai tambah pada limbah elektronik.'
+                    },
+                    {
+                        id: 7,
+                        wasteName: 'Popok Sekali Pakai',
+                        wasteImg: './img/popok.png',
+                        recycledName: 'Briket Higienis',
+                        recycledImg: './img/briketplastik.png',
+                        description: 'Popok sekali pakai diolah dengan teknologi sterilisasi khusus dan dipadatkan menjadi briket higienis yang aman untuk bahan bakar alternatif.'
+                    },
+                    {
+                        id: 8,
+                        wasteName: 'Kertas',
+                        wasteImg: './img/koran.png',
+                        recycledName: 'Tisu Daur Ulang',
+                        recycledImg: './img/tisuhasildaurulangkertas.png',
+                        description: 'Kertas bekas diolah kembali melalui proses pemutihan dan pelembutan untuk menghasilkan tisu yang lembut, berkualitas, dan ramah lingkungan.'
+                    },
+                    {
+                        id: 9,
+                        wasteName: 'Botol Plastik',
+                        wasteImg: './img/botol.png',
+                        recycledName: '3D Filament',
+                        recycledImg: './img/3d filament.jpeg.png',
+                        description: 'Botol plastik PET dicacah, dibersihkan, dan diekstrusi menjadi filament untuk printer 3D, memberikan kehidupan baru pada plastik bekas.'
+                    },
+                    {
+                        id: 10,
+                        wasteName: 'Jirigen Bekas',
+                        wasteImg: './img/galon.png',
+                        recycledName: 'Paving Blok',
+                        recycledImg: './img/paving blok.png',
+                        description: 'Jirigen plastik dicacah dan dicampur dengan semen untuk membuat paving blok yang kuat dan tahan lama untuk jalan atau halaman.'
+                    },
+                    {
+                        id: 11,
+                        wasteName: 'Plastik Kresek',
+                        wasteImg: './img/kresek.png',
+                        recycledName: 'Tas Belanja',
+                        recycledImg: './img/tas belanja.png',
+                        description: 'Plastik kresek bekas dibersihkan, dipotong, dan dirajut menjadi tas belanja yang kuat, tahan lama, dan memiliki nilai estetika tinggi.'
+                    },
+                    {
+                        id: 12,
+                        wasteName: 'Kamera/HP Bekas',
+                        wasteImg: './img/smarphone.png',
+                        recycledName: 'Modul IoT',
+                        recycledImg: './img/iot hp bekas camera kecil.jpeg.png',
+                        description: 'Komponen elektronik dari kamera dan HP bekas seperti sensor dan kamera dimanfaatkan untuk membuat modul IoT dan smart device yang fungsional.'
+                    },
+                    {
+                        id: 13,
+                        wasteName: 'Baterai Bekas',
+                        wasteImg: './img/baterai.png',
+                        recycledName: 'Baterai Baru',
+                        recycledImg: './img/baterai baru.jpeg.png',
+                        description: 'Baterai bekas didaur ulang untuk mengekstrak logam berharga seperti lithium, kobalt, dan nikel yang kemudian digunakan untuk membuat baterai baru.'
+                    }
+                ],
+                init() {
+                    window.addEventListener('scroll', () => {
+                        this.navScrolled = window.scrollY > 50;
+                    });
+                },
+                openModal(item) {
+                    this.selectedItem = item;
+                    this.modalOpen = true;
+                },
+                closeModal() {
+                    this.modalOpen = false;
+                }
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            lucide.createIcons();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

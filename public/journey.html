@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia — Ekspedisi</title>
+    <link rel="stylesheet" href="./assets/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.1;
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px) scale(1.2);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(-15px) scale(0.8);
+                opacity: 0.2;
+            }
+
+            75% {
+                transform: translateY(-20px) translateX(5px) scale(1.1);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            33% {
+                transform: translateX(30px) translateY(-20px);
+            }
+
+            66% {
+                transform: translateX(-20px) translateY(30px);
+            }
+
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        .modal-enter {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-leave {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+
+<body class="bg-stone-950 text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden"
+    x-data="journeyPage()"
+    x-effect="if(modalOpen) { document.body.style.overflow = 'hidden'; } else { document.body.style.overflow = ''; }"
+    x-init="updateScroll()" @scroll.window="updateScroll()">
+
+    <div class="grain-overlay"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'"
+        style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain">
+                    <span class="font-display text-base md:text-lg font-semibold text-white transition-colors"
+                        style="--hover-color: #92400e;" onmouseover="this.style.color='#92400e'"
+                        onmouseout="this.style.color='white'">
+                        Trash<span class="text-emerald-400">Pedia</span>
+                    </span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                    <a href="about.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                    <a href="journey.html" class="text-sm font-medium text-orange-400 transition-colors">Ekspedisi</a>
+                    <a href="recycle.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Daur
+                        Ulang</a>
+                    <a href="data.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                    <a href="contact.html"
+                        class="text-sm font-medium text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+                </div>
+
+                <button @click="navOpen = !navOpen" class="md:hidden text-stone-300 hover:text-white">
+                    <i x-show="!navOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="navOpen" data-lucide="x" class="w-6 h-6" style="display: none;"></i>
+                </button>
+            </div>
+
+            <div x-show="navOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
+                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                <a href="index.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
+                <a href="about.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Tentang</a>
+                <a href="journey.html" class="block py-2 text-orange-400 transition-colors">Ekspedisi</a>
+                <a href="recycle.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Daur
+                    Ulang</a>
+                <a href="data.html" class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Data</a>
+                <a href="contact.html"
+                    class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative w-full overflow-hidden" style="height: 950vh; background-color: #0c0a09;">
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-0 overflow-hidden hidden md:block">
+            <img src="./img/latarekspedisi.png" alt="Background Desktop" class="w-full h-full object-cover object-top"
+                style="opacity: 1; min-height: 100%; min-width: 100%;">
+        </div>
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-0 overflow-hidden md:hidden">
+            <img src="./img/latarekspedisivertikal.png" alt="Background Mobile"
+                class="w-full h-full object-cover object-top" style="opacity: 1; min-height: 100%; min-width: 100%;">
+        </div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[1] pointer-events-none"
+            style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.15) 100%);">
+        </div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[4] pointer-events-none transition-all duration-700"
+            :style="`background: ${currentBackground}; opacity: ${0.15 + Math.min(scrollProgress, 80) / 300}; mix-blend-mode: soft-light;`">
+        </div>
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[3] pointer-events-none transition-all duration-700 blur-[120px]"
+            :style="`background-image: radial-gradient(circle at 25% 20%, ${currentAccent} 0%, transparent 50%), radial-gradient(circle at 75% 40%, rgba(202,138,4,0.10) 0%, transparent 50%), radial-gradient(circle at 50% 70%, rgba(234,88,12,0.12) 0%, transparent 50%), radial-gradient(circle at 30% 90%, rgba(220,38,38,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 95%, rgba(82,82,91,0.18) 0%, transparent 50%); opacity: 0.15; mix-blend-mode: color;`">
+        </div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[1] pointer-events-none overflow-hidden">
+            <template x-for="particle in particles" :key="particle.id">
+                <div class="absolute rounded-full opacity-20"
+                    :style="`left: ${particle.left}%; top: ${particle.top}%; width: ${particle.size}px; height: ${particle.size}px; background: rgba(255,255,255,0.3); animation: floatParticle ${particle.duration}s infinite ease-in-out; animation-delay: ${particle.delay}s;`">
+                </div>
+            </template>
+        </div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[1] opacity-[0.03] pointer-events-none" style="background-image: 
+                    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px),
+                    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px);
+                    background-size: 50px 50px;"></div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[1] pointer-events-none">
+            <template x-for="(_, i) in Array(12)" :key="'depth-' + i">
+                <div class="absolute left-0 right-0 h-px opacity-[0.08]"
+                    :style="`top: ${i * 8.33}%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transform: translateY(${scrollProgress * 0.05 * (i % 4)}px);`">
+                </div>
+            </template>
+        </div>
+
+
+        <div class="absolute top-0 left-0 right-0 bottom-0 w-full z-[1] pointer-events-none">
+            <template x-for="d in debris" :key="d.id">
+                <div class="absolute rounded-sm opacity-[0.15]"
+                    :style="`left: ${d.left}%; top: ${d.top}%; width: ${d.size}px; height: ${d.size}px; background: rgba(139,69,19,0.4); transform: rotate(${d.rotation}deg); animation: drift ${d.duration}s infinite ease-in-out; animation-delay: ${d.delay}s;`">
+                </div>
+            </template>
+        </div>
+
+
+
+        <div class="relative z-10 max-w-5xl mx-auto h-[950vh] px-4 sm:px-6">
+
+            <div class="sticky py-4 sm:py-6 z-20 flex justify-center px-4"
+                style="top: 40vh; transform: translateY(-50%);">
+                <div class="relative max-w-4xl mx-auto text-center">
+
+                    <div class="relative z-10">
+
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-8 transition-all duration-300"
+                            style="background: rgba(194, 65, 12, 0.15); border: 2px solid rgba(194, 65, 12, 0.4);">
+                            <div class="w-2 h-2 rounded-full animate-pulse" style="background: #c2410c;"></div>
+                            <span class="text-sm uppercase tracking-[0.25em] font-bold"
+                                style="color: #9a3412;">Perjalanan Waktu</span>
+                        </div>
+
+
+                        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-10 leading-[1.05]"
+                            style="color: #ffffff; text-shadow: 0 4px 16px rgba(0,0,0,0.6);">
+                            Jejak Sampah<br class="hidden sm:block">
+                            <span class="text-emerald-400" style="text-shadow: none;">di Lautan Waktu</span>
+                        </h1>
+
+
+                        <a href="#timeline"
+                            class="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-base uppercase tracking-wider transition-all duration-300 hover:scale-105 active:scale-95"
+                            style="background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: white; box-shadow: 0 8px 24px rgba(234, 88, 12, 0.4);">
+                            <span>Jelajahi Sekarang</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute left-1/2 -translate-x-1/2 w-screen pointer-events-none">
+                <template x-for="marker in categoryMarkers" :key="marker.title + '-bg'">
+                    <div class="absolute left-0 right-0"
+                        :style="`top: ${marker.position * spacingFactor}%; height: ${marker.height * spacingFactor}%; background: ${marker.background};`">
+                    </div>
+                </template>
+            </div>
+
+            <div class="relative h-[700vh]">
+                <template x-for="item in wasteItems" :key="item.name">
+                    <button type="button"
+                        class="absolute group transform -translate-x-1/2 -translate-y-1/2 text-center w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 focus:outline-none transition-all duration-300 active:scale-105 sm:active:scale-110 touch-manipulation"
+                        :style="`top: ${(item.y * spacingFactor) + spacingOffset}%; left: ${item.x}%;`"
+                        @click="openWaste(item)">
+                        <div class="relative w-full flex justify-center mb-1 sm:mb-2">
+                            <div class="absolute inset-0 rounded-full opacity-0 group-active:opacity-100 sm:group-hover:opacity-100 transition-opacity duration-300 blur-xl"
+                                :style="`background: ${item.accent};`"></div>
+                            <template x-if="item.image">
+                                <img :src="item.image" :alt="item.name"
+                                    class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] pointer-events-none transition-transform duration-300">
+                            </template>
+                            <template x-if="!item.image">
+                                <span
+                                    class="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl transition-transform duration-300"
+                                    x-text="item.emoji"></span>
+                            </template>
+                        </div>
+                        <div class="px-3 py-2 mt-2 transition-all duration-300">
+                            <p class="text-white font-bold text-[10px] sm:text-xs md:text-sm transition-colors duration-300 group-active:text-orange-400 sm:group-hover:text-orange-400 leading-tight"
+                                style="text-shadow: 0 2px 8px rgba(0,0,0,0.8);" x-text="item.name"></p>
+                            <p class="text-orange-400 text-[9px] sm:text-[10px] md:text-xs transition-colors duration-300 group-active:text-orange-300 sm:group-hover:text-orange-300 font-semibold"
+                                style="text-shadow: 0 2px 6px rgba(0,0,0,0.8);" x-text="item.time"></p>
+                        </div>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-stone-900 py-16 px-6 relative">
+        <div class="section-divider mb-12"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="./img/Logo Trashpedia Technoversary 2025.png" alt="TrashPedia Logo"
+                                class="w-full h-full object-contain p-1">
+                        </div>
+                        <span class="font-display text-xl font-semibold text-white">Trash<span
+                                class="text-emerald-400">Pedia</span></span>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-6">
+                        Ekspedisi interaktif untuk memahami nasib sampah kita dan dampaknya terhadap bumi.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg glass-panel border border-stone-800 flex items-center justify-center text-stone-400 hover:text-orange-400 hover:border-orange-500/30 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Navigasi</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Beranda</a></li>
+                        <li><a href="about.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tentang</a></li>
+                        <li><a href="journey.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Ekspedisi</a>
+                        </li>
+                        <li><a href="recycle.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Daur Ulang</a>
+                        </li>
+                        <li><a href="data.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Data</a></li>
+                        <li><a href="contact.html"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Sumber Daya</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Komunitas</a>
+                        </li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Tips
+                                3R</a></li>
+                        <li><a href="#" class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Zona
+                                Kritis</a></li>
+                        <li><a href="#"
+                                class="text-stone-400 hover:text-orange-400 text-sm transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-stone-600 text-sm">© 2025 All rights reserved.</p>
+                <div class="flex gap-6 text-stone-600 text-xs">
+                    <a href="#" class="hover:text-stone-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-stone-400 transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div x-show="modalOpen" x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition duration-150 ease-in"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center px-4"
+        style="display: none; background-color: rgba(0, 0, 0, 0.92);" @click.self="closeModal()">
+        <div x-transition:enter="transition duration-300 ease-out"
+            x-transition:enter-start="opacity-0 scale-90 translate-y-4"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition duration-200 ease-in"
+            x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="opacity-0 scale-95 translate-y-2"
+            class="relative bg-gradient-to-br from-stone-900 via-stone-800 to-stone-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-700/50"
+            @click.stop>
+            <div class="relative z-10">
+                <button @click="closeModal()"
+                    class="absolute top-2 right-2 sm:top-3 sm:right-3 w-8 h-8 rounded-xl bg-stone-800/80 border border-orange-500/30 flex items-center justify-center text-stone-300 hover:text-white hover:bg-orange-500/20 transition-all z-20 touch-manipulation">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+
+                <div class="text-center mb-4 sm:mb-6 pt-2">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4 rounded-xl sm:rounded-2xl bg-stone-800/60 border-2 border-orange-500/30 flex items-center justify-center overflow-hidden">
+                        <template x-if="activeItem.image">
+                            <img :src="activeItem.image" :alt="activeItem.name"
+                                class="w-full h-full object-contain p-2">
+                        </template>
+                        <template x-if="!activeItem.image">
+                            <span class="text-4xl sm:text-5xl" x-text="activeItem.emoji"></span>
+                        </template>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-display font-bold text-white mb-2 px-2"
+                        x-text="activeItem.name"></h3>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-orange-500/30 border-2 border-orange-500/50 mb-2">
+                        <i data-lucide="clock" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-300"></i>
+                        <p class="text-orange-200 text-xs sm:text-sm font-bold" x-text="activeItem.time"></p>
+                    </div>
+                    <p class="text-[10px] sm:text-xs uppercase tracking-wider text-stone-300 font-semibold px-2"
+                        x-text="activeItem.category"></p>
+                </div>
+
+                <div class="space-y-2 sm:space-y-3">
+                    <div class="bg-red-950/40 rounded-xl sm:rounded-2xl p-3 sm:p-4 border-2 border-red-500/40">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-red-300"></i>
+                            <h4 class="text-[10px] sm:text-xs text-red-300 uppercase tracking-wider font-bold">
+                                Dampak</h4>
+                        </div>
+                        <p class="text-stone-100 text-xs sm:text-sm leading-relaxed font-medium"
+                            x-text="activeItem.impact"></p>
+                    </div>
+                    <div class="bg-emerald-950/40 rounded-xl sm:rounded-2xl p-3 sm:p-4 border-2 border-emerald-500/40">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="lightbulb" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300"></i>
+                            <h4 class="text-[10px] sm:text-xs text-emerald-300 uppercase tracking-wider font-bold">
+                                Solusi</h4>
+                        </div>
+                        <p class="text-stone-100 text-xs sm:text-sm leading-relaxed font-medium"
+                            x-text="activeItem.solution"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div x-show="showQuizModal" x - transition: enter="transition ease-out duration-300" x - transition: enter -
+        start="opacity-0 scale-95" x - transition: enter - end="opacity-100 scale-100" x - transition:
+        leave="transition ease-in duration-200" x - transition: leave - start="opacity-100 scale-100" x - transition:
+        leave - end="opacity-0 scale-95"
+        class="fixed inset-0 z-50 flex items-end sm:items-center justify-center px-4 pb-4 sm:pb-0"
+        style="display: none;">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" @click="showQuizModal = false"></div>
+        <div class="relative glass-panel-strong border border-stone-700 rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+            x-data="{ selected: null, answered: false }"
+            x-effect="$watch('showQuizModal', value => { if(!value){ answered = false; selected = null; }})">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h3 class="text-2xl font-display font-semibold text-white mb-1">Mini Quiz</h3>
+                    <p class="text-stone-400 text-xs">Pertanyaan <span x-text="currentQuiz + 1"></span> dari <span
+                            x-text="quizData.length"></span></p>
+                </div>
+                <button @click="showQuizModal = false"
+                    class="w-8 h-8 rounded-lg glass-panel border border-stone-700 flex items-center justify-center text-stone-400 hover:text-white hover:border-stone-600 transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="mb-6">
+                <p class="text-stone-200 text-lg mb-6 leading-relaxed" x-text="quizData[currentQuiz].q"></p>
+                <div class="space-y-3">
+                    <template x-for="(opt, index) in quizData[currentQuiz].options" :key="opt">
+                        <button @click="selected = index; answered = true"
+                            :class="answered
+                                    ? (index === quizData[currentQuiz].a ? 'bg-emerald-500/20 border-emerald-500 text-emerald-200' : (selected === index ? 'bg-red-500/20 border-red-500 text-red-200' : 'bg-stone-800/50 border-stone-700 text-stone-500'))
+                                    : 'bg-stone-800/50 border-stone-700 text-stone-300 hover:bg-stone-700/50 hover:border-stone-600'" :disabled="answered"
+                            class="w-full text-left px-5 py-4 rounded-xl border transition-all text-sm font-medium"
+                            x-text="opt">
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <div x-show="answered" class="flex justify-end gap-3">
+                <button
+                    @click="if(currentQuiz < quizData.length - 1) {currentQuiz++; answered = false; selected = null; } else {showQuizModal = false; currentQuiz = 0; answered = false; selected = null; }"
+                    class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-400 hover:to-orange-500 transition-all shadow-lg glow-orange">
+                    <span x-text="currentQuiz < quizData.length - 1 ? 'Pertanyaan Selanjutnya' : 'Selesai'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('journeyPage', () => ({
+                navOpen: false,
+                navScrolled: false,
+                scrollProgress: 0,
+                yearLabel: '1‑12 Bulan',
+                currentBackground: 'linear-gradient(180deg, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.08) 35%, rgba(234,88,12,0.08) 70%, rgba(82,82,91,0.12) 100%)',
+                currentAccent: 'rgba(74,222,128,0.55)',
+                modalOpen: false,
+                activeItem: {},
+                showQuizModal: false,
+                currentQuiz: 0,
+                spacingFactor: 1.45,
+                spacingOffset: 6,
+                particles: Array.from({ length: 30 }, (_, i) => ({
+                    id: i,
+                    left: Math.random() * 100,
+                    top: Math.random() * 100,
+                    size: Math.random() * 4 + 2,
+                    duration: Math.random() * 20 + 15,
+                    delay: Math.random() * 5
+                })),
+                debris: Array.from({ length: 20 }, (_, i) => ({
+                    id: i,
+                    left: (i * 5) % 100,
+                    top: (i * 7) % 100,
+                    size: (i % 3) + 1.5,
+                    rotation: i * 18,
+                    duration: 15 + i * 2,
+                    delay: i * 0.3
+                })),
+                quizData: [
+                    { q: 'Berapa lama kantong plastik tipis bisa terurai?', options: ['Beberapa bulan', '2-3 tahun', 'Sehari'], a: 1 },
+                    { q: 'Mengapa baterai tidak boleh dibuang ke tempat sampah biasa?', options: ['Berat', 'Mengandung logam berat', 'Mudah meledak karena gas'], a: 1 },
+                    { q: 'Solusi terbaik untuk botol plastik PET?', options: ['Buang ke laut', 'Gunakan ulang / isi ulang', 'Bakar saja'], a: 1 }
+                ],
+                categoryMarkers: [
+                    { title: '🟢 1 — 12 Bulan', subtitle: 'Cepat terurai', description: 'Sisa dapur & serat alami yang aman jika dikelola lewat kompos.', position: 8, height: 20, color: 'rgba(74,222,128,0.4)', background: 'linear-gradient(180deg, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.08) 30%, rgba(4,120,87,0.04) 60%, transparent 100%)', timeline: '1‑12 Bulan' },
+                    { title: '🟡 1 — 5 Tahun', subtitle: 'Sedang', description: 'Barang keseharian yang masih lama hilang sehingga harus ditekan penggunaannya.', position: 34, height: 20, color: 'rgba(250,204,21,0.4)', background: 'linear-gradient(180deg, rgba(202,138,4,0.15) 0%, rgba(161,98,7,0.08) 30%, rgba(120,53,15,0.04) 60%, transparent 100%)', timeline: '1‑5 Tahun' },
+                    { title: '🟠 5 — 100 Tahun', subtitle: 'Lama', description: 'Bahan sintetis ringan seperti styrofoam dan logam tipis.', position: 58, height: 22, color: 'rgba(249,115,22,0.4)', background: 'linear-gradient(180deg, rgba(234,88,12,0.18) 0%, rgba(194,65,12,0.10) 30%, rgba(154,52,18,0.05) 60%, transparent 100%)', timeline: '5‑100 Tahun' },
+                    { title: '🔴 Ratusan — Ribuan Tahun', subtitle: 'Sangat lama', description: 'Plastik tebal & popok yang bertahan berabad-abad.', position: 84, height: 20, color: 'rgba(248,113,113,0.4)', background: 'linear-gradient(180deg, rgba(220,38,38,0.20) 0%, rgba(185,28,28,0.12) 30%, rgba(153,27,27,0.06) 60%, transparent 100%)', timeline: '100‑1.000 Tahun' },
+                    { title: '⚫ Tidak Terurai', subtitle: 'Praktis abadi', description: 'Kaca, e-waste, dan mikroplastik yang hanya pecah menjadi fragmen berbahaya.', position: 110, height: 15, color: 'rgba(161,161,170,0.4)', background: 'linear-gradient(180deg, rgba(82,82,91,0.25) 0%, rgba(63,63,70,0.15) 30%, rgba(39,39,42,0.08) 60%, transparent 100%)', timeline: 'Abadi' }
+                ],
+                wasteItems: [
+                    // 🟢 1-12 Bulan (y: 5-16) - Pola zigzag
+                    { name: 'Sisa sayur', time: '1 minggu', category: '🟢 1 — 12 Bulan', impact: 'Jika menumpuk di TPA, pembusukan anaerob memicu gas metana.', solution: 'Pisahkan sisa dapur ke komposter atau bank sampah organik.', image: './img/sisa%20sayur.png', emoji: '🌱', accent: 'rgba(74,222,128,0.35)', x: 18, y: 5 },
+                    { name: 'Kulit pisang', time: '2–4 minggu', category: '🟢 1 — 12 Bulan', impact: 'Mengundang lalat \u0026 menghasilkan bau jika bercampur sampah campur.', solution: 'Potong kecil lalu masukkan ke komposter tertutup.', image: './img/kulitpisang.png', emoji: '🍌', accent: 'rgba(74,222,128,0.35)', x: 65, y: 7 },
+                    { name: 'Kertas koran', time: '6 minggu', category: '🟢 1 — 12 Bulan', impact: 'Butuh pohon baru dan tinta bisa mencemari air ketika terurai di TPA.', solution: 'Gunakan ulang sebagai pembungkus atau setor ke bank kertas.', image: './img/koran.png', emoji: '📰', accent: 'rgba(74,222,128,0.35)', x: 35, y: 9 },
+                    { name: 'Daun kering', time: '1–3 bulan', category: '🟢 1 — 12 Bulan', impact: 'Dibakar menghasilkan asap pekat \u0026 partikulat.', solution: 'Jadikan mulsa atau campuran kompos karbon.', image: './img/daun.png', emoji: '🍃', accent: 'rgba(74,222,128,0.35)', x: 82, y: 11 },
+                    { name: 'Karton', time: '2 bulan', category: '🟢 1 — 12 Bulan', impact: 'Mudah menyerap air lalu berjamur jika menumpuk di TPA.', solution: 'Potong jadi lapisan mulsa atau kirim ke daur ulang.', image: null, emoji: '📦', accent: 'rgba(74,222,128,0.35)', x: 52, y: 13 },
+                    { name: 'Tisu', time: '2–3 bulan', category: '🟢 1 — 12 Bulan', impact: 'Pemutih dan parfum di tisu bisa terbawa ke air lindi.', solution: 'Gunakan kain lap dan komposkan tisu bebas minyak.', image: './img/Tisu.png', emoji: '🧻', accent: 'rgba(74,222,128,0.35)', x: 12, y: 15 },
+                    { name: 'Kain katun', time: '6–12 bulan', category: '🟢 1 — 12 Bulan', impact: 'Pewarna tekstil merembes ke tanah saat kain membusuk.', solution: 'Sumbangkan atau jadikan lap guna ulang.', image: null, emoji: '🧵', accent: 'rgba(74,222,128,0.35)', x: 75, y: 16 },
+
+                    // 🟡 1-5 Tahun (y: 22-25) - Zigzag
+                    { name: 'Filter rokok', time: '≈5 tahun', category: '🟡 1 — 5 Tahun', impact: 'Serat selulosa asetat menyerap nikotin dan logam berat.', solution: 'Kumpulkan di wadah kecil lalu setor ke dropbox B3.', image: './img/rokok.png', emoji: '🚬', accent: 'rgba(250,204,21,0.35)', x: 28, y: 22 },
+                    { name: 'Kantong plastik tipis', time: '2–3 tahun', category: '🟡 1 — 5 Tahun', impact: 'Mudah terbang ke sungai dan pecah jadi mikroplastik.', solution: 'Bawa tas kain atau keranjang sendiri.', image: './img/kresek.png', emoji: '🛍️', accent: 'rgba(250,204,21,0.35)', x: 70, y: 24 },
+
+                    // 🟠 5-100 Tahun (y: 29-42) - Pola acak
+                    { name: 'Masker medis', time: '10–20 tahun', category: '🟠 5 — 100 Tahun', impact: 'Serat meltblown dari masker sekali pakai pecah jadi mikroplastik dan membawa residu cairan tubuh.', solution: 'Pakai masker kain berlapis bila aman, lalu kumpulkan masker medis terpisah sebelum dikirim ke dropbox limbah B3.', image: './img/masker.png', emoji: null, accent: 'rgba(249,115,22,0.35)', x: 45, y: 29 },
+                    { name: 'Helm proyek plastik', time: '20–30 tahun', category: '🟠 5 — 100 Tahun', impact: 'Cangkang ABS \u0026 busa pelindung sulit terurai dan dapat pecah menjadi serpihan tajam saat dibuang.', solution: 'Gunakan ulang untuk pelatihan keselamatan atau serahkan ke bank sampah yang menerima alat keselamatan.', image: null, emoji: '🪖', accent: 'rgba(249,115,22,0.35)', x: 15, y: 31 },
+                    { name: 'Plastik bungkus mie instan', time: '20–30 tahun', category: '🟠 5 — 100 Tahun', impact: 'Lapis metalized pada bungkus mie instan memantul panas matahari dan hampir tidak dapat didaur ulang.', solution: 'Bersihkan kemasan lalu kumpulkan ke dropbox plastik fleksibel atau gunakan program penukaran sampah sachet.', image: './img/mie%20instan.png', emoji: null, accent: 'rgba(249,115,22,0.35)', x: 78, y: 33 },
+                    { name: 'Styrofoam cup', time: '≥5 tahun', category: '🟠 5 — 100 Tahun', impact: 'Sulit didaur ulang dan pecah jadi butiran EPS beracun.', solution: 'Gunakan mug atau tumbler yang bisa dicuci.', image: './img/gelascup.png', emoji: '⚪', accent: 'rgba(249,115,22,0.35)', x: 38, y: 36 },
+                    { name: 'Botol kecap plastik', time: '20–30 tahun', category: '🟠 5 — 100 Tahun', impact: 'Pigmen pada botol kecap memperumit proses daur ulang dan menghasilkan asap beracun saat dibakar.', solution: 'Pilih isi ulang dari warung curah dan bilas botol bekas sebelum disetor.', image: './img/botol%20kecap.png', emoji: null, accent: 'rgba(249,115,22,0.35)', x: 68, y: 38 },
+                    { name: 'Kaleng aluminium', time: '80–200 tahun', category: '🟠 5 — 100 Tahun', impact: 'Butuh energi besar untuk menambang bauksit baru.', solution: 'Setor ke bank sampah karena logam ini laku didaur ulang.', image: './img/botolkaleng.png', emoji: '🥫', accent: 'rgba(249,115,22,0.35)', x: 22, y: 40 },
+                    { name: 'Bola karet', time: '50–70 tahun', category: '🟠 5 — 100 Tahun', impact: 'Retakan pada karet melepaskan mikro-karet saat terkena panas dan gesekan.', solution: 'Tambal atau donasikan ke komunitas olahraga agar masa pakai lebih panjang.', image: null, emoji: '⚽', accent: 'rgba(249,115,22,0.35)', x: 85, y: 42 },
+
+                    // 🔴 Ratusan-Ribuan Tahun (y: 46-64) - Pola zigzag
+                    { name: 'Bubble wrap', time: '100–500 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Gelembung PE ringan mudah terbang ke sungai dan menyumbat saluran air.', solution: 'Gunakan ulang sebagai pelindung paket atau serahkan ke pengepul plastik lunak.', image: './img/bubble%20wrap.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 32, y: 46 },
+                    { name: 'DVD/CD', time: '100–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Lapisan polycarbonate dan aluminium pada DVD/CD sangat tahan lama dan melepas logam berat saat terurai.', solution: 'Donasikan ke perpustakaan atau setor ke dropbox e-waste untuk daur ulang komponennya.', image: './img/dvd.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 72, y: 48 },
+                    { name: 'Botol plastik (PET)', time: '450–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Pecah menjadi mikroplastik yang termakan plankton.', solution: 'Gunakan botol isi ulang \u0026 refill station.', image: './img/botol.png', emoji: '🥤', accent: 'rgba(248,113,113,0.35)', x: 18, y: 50 },
+                    { name: 'Popok sekali pakai', time: '450–500 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Gel penyerap menyimpan residu kimia dan bakteri.', solution: 'Berpindah ke popok kain atau layanan cloth diaper.', image: './img/popok.png', emoji: '🍼', accent: 'rgba(248,113,113,0.35)', x: 55, y: 52 },
+                    { name: 'Ban karet', time: '600–800 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Melepas mikro-karet saat terpapar panas \u0026 abrasi.', solution: 'Retread ban atau ubah jadi produk kerajinan.', image: './img/ban.png', emoji: '🛞', accent: 'rgba(248,113,113,0.35)', x: 82, y: 54 },
+                    { name: 'Plastik keras (HDPE)', time: '500–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Tahan cuaca sehingga menumpuk di TPA.', solution: 'Gunakan isi ulang detergen \u0026 tempatkan ke bank plastik.', image: './img/ditergen.png', emoji: '🧴', accent: 'rgba(248,113,113,0.35)', x: 38, y: 57 },
+                    { name: 'Baterai', time: '500+ tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Mengandung logam berat (Hg, Cd, Pb) yang meracuni air tanah.', solution: 'Kumpulkan lalu kirim ke dropbox e-waste atau B3.', image: './img/baterai.png', emoji: '🪫', accent: 'rgba(248,113,113,0.35)', x: 68, y: 59 },
+                    { name: 'Pipa PVC', time: '100–1.000 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'PVC melepas dioksin dan phthalate saat terpapar panas atau sinar UV, mencemari tanah dan air.', solution: 'Gunakan ulang untuk proyek DIY atau setor ke bank sampah yang menerima material konstruksi.', image: './img/pipa%20pvc.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 12, y: 61 },
+                    { name: 'Galon air kecil', time: '100–500 tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Galon PET kecil sering dipakai ulang tanpa standar sehingga lapisan dalamnya retak dan lepas ke air.', solution: 'Isi ulang di depot resmi dan hindari membeli galon sekali pakai.', image: './img/galon.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 52, y: 63 },
+                    { name: 'Spons cuci piring', time: '500+ tahun', category: '🔴 Ratusan — Ribuan Tahun', impact: 'Serat poliuretan spons melepas mikroplastik saat digosok dan terbawa ke saluran air.', solution: 'Beralih ke spons selulosa atau loofah dan kumpulkan spons sintetis untuk eco-brick.', image: './img/spons.png', emoji: null, accent: 'rgba(248,113,113,0.35)', x: 78, y: 64 },
+
+                    // ⚫ Tidak Terurai (y: 68-78) - Pola acak, jauh dari footer
+                    { name: 'Keramik', time: '100.000–1.000.000 tahun', category: '⚫ Tidak Terurai', impact: 'Keramik nyaris abadi dan pecahannya dapat memantulkan panas serta melukai pekerja TPA.', solution: 'Gunakan ulang sebagai media drainase, pengeras tanah, atau setorkan ke bank material.', image: './img/keramik.png', emoji: null, accent: 'rgba(161,161,170,0.35)', x: 25, y: 68 },
+                    { name: 'Kaca', time: 'hingga 1 juta tahun', category: '⚫ Tidak Terurai', impact: 'Fragmen tajam melukai satwa \u0026 memantulkan panas.', solution: 'Gunakan ulang botol kaca atau setor ke pabrik kaca.', image: './img/pecahan%20kaca.png', emoji: '🪟', accent: 'rgba(161,161,170,0.35)', x: 62, y: 70 },
+                    { name: 'Batu bata', time: '100.000+ tahun', category: '⚫ Tidak Terurai', impact: 'Campuran tanah liat yang sudah disinter hampir tidak bisa kembali menjadi tanah dan memakan ruang TPA.', solution: 'Manfaatkan ulang untuk bangunan kecil atau hancurkan sebagai agregat jalan.', image: null, emoji: '🧱', accent: 'rgba(161,161,170,0.35)', x: 42, y: 73 },
+                    { name: 'Smartphone/HP', time: 'tidak terurai', category: '⚫ Tidak Terurai', impact: 'Komponen mengandung timbal, merkuri, arsen yang meracuni tanah dan air.', solution: 'Serahkan ke fasilitas daur ulang elektronik resmi atau program take-back produsen.', image: './img/smarphone.png', emoji: '📱', accent: 'rgba(161,161,170,0.35)', x: 75, y: 75 },
+                    { name: 'Kabel elektronik', time: 'tidak terurai', category: '⚫ Tidak Terurai', impact: 'Kulit kabel (PVC) melepas dioksin saat dibakar, kawat tembaga mencemari tanah.', solution: 'Kumpulkan dan setor ke dropbox e-waste atau bank sampah elektronik.', image: './img/kabel.png', emoji: '🔌', accent: 'rgba(161,161,170,0.35)', x: 18, y: 77 },
+                    { name: 'Microplastic', time: 'selamanya', category: '⚫ Tidak Terurai', impact: 'Butiran mikro masuk ke rantai makanan \u0026 sulit disaring.', solution: 'Kurangi plastik sekali pakai dan gunakan filter laundry.', image: './img/microplastic.png', emoji: '🧩', accent: 'rgba(161,161,170,0.35)', x: 55, y: 78 }
+                ],
+                openWaste(item) {
+                    this.activeItem = item;
+                    this.modalOpen = true;
+                    document.body.style.overflow = 'hidden';
+                },
+                closeModal() {
+                    this.modalOpen = false;
+                    document.body.style.overflow = '';
+                },
+                updateScroll() {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    this.scrollProgress = (winScroll / height) * 100;
+                    this.navScrolled = winScroll > 50;
+                    const category = [...this.categoryMarkers].reverse().find(marker => this.scrollProgress >= marker.position * this.spacingFactor) || this.categoryMarkers[0];
+                    this.yearLabel = category.timeline;
+                    this.currentBackground = category.background;
+                    this.currentAccent = category.color.replace('0.4)', '0.55)');
+                }
+            }));
+        });
+    </script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            lucide.createIcons();
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
