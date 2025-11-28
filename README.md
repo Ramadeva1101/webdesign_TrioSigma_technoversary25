@@ -23,6 +23,8 @@ Deskripsi Website
 TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perjalanan sampah dari tangan kita hingga ratusan tahun ke depan. Website ini dirancang untuk meningkatkan kesadaran masyarakat tentang dampak jangka panjang sampah terhadap lingkungan melalui pengalaman visual yang immersive dan data yang informatif.
 
 ---
+lengkah menjalankan website 
+1.**clone repository**
 
 2. **Install Dependencies**
    ```bash
