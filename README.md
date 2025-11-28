@@ -1,8 +1,10 @@
-# TrashPedia - Interactive Waste Journey
+# TrashPedia 
 
-👥 Nama Anggota dan Asal Instansi
+👥 Nama Tim, Anggota dan Asal Instansi
 
 Universitas Primakara
+
+Trio Sigma
 
 1. Ken Jatikusumo
 2. I Gede Ramadeva
