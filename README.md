@@ -24,7 +24,9 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
 
 ---
 lengkah menjalankan website 
-1.**clone repository**
+
+
+1. **Clone repository**
 
 2. **Install Dependencies**
    ```bash
