@@ -54,7 +54,8 @@
     <div class="grain-overlay"></div>
 
     <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'">
+        :class="navScrolled ? 'glass-panel-strong py-3 shadow-lg' : 'py-4'"
+        style="background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center justify-between">
                 <a href="/" class="flex items-center gap-2 group">
@@ -90,7 +91,8 @@
                 x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
                 x-transition:leave="transition ease-in duration-150"
                 x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
-                class="md:hidden mt-4 pb-4 space-y-2" style="display: none;">
+                class="md:hidden mt-4 pb-4 space-y-2 glass-panel-strong rounded-2xl p-4 border border-stone-800"
+                style="display: none;">
                 <a href="/"
                     class="block py-2 text-stone-300 hover:text-orange-400 transition-colors">Beranda</a>
                 <a href="/about"
