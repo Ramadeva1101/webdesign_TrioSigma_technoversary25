@@ -48,5 +48,3 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
    
    Buka file `public/index.html` di browser
 
-**Dibuat untuk Lomba Web Design 2025**
-**Universitas Primakara**
