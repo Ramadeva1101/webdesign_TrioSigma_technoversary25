@@ -1,0 +1,13 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force GitHub to detect languages correctly
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.json linguist-language=JSON
+
+# Exclude generated files from language stats
+public/assets/tailwind.css linguist-generated=true
+node_modules/** linguist-vendored=true
+
