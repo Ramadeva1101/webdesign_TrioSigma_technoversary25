@@ -168,7 +168,7 @@
     </nav>
 
     
-    <!-- Year Indicator Next to Scrollbar - Follows Scroll -->
+    
     <template x-if="scrollProgress >= 12">
         <div class="fixed right-4 z-50 pointer-events-none transition-all duration-300"
             :style="`top: ${Math.min(Math.max(100, (scrollProgress / 100) * (window.innerHeight - 200) + 100), window.innerHeight - 100)}px; transform: translateY(-50%);`">
@@ -312,7 +312,7 @@
                     </button>
                 </template>
                 
-                <!-- Quiz Buttons Between Zones -->
+                
                 <template x-for="(quiz, index) in [
                     { position: 5, quizIndex: 0 },
                     { position: 20, quizIndex: 1 },
