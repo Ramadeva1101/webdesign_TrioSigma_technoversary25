@@ -1,0 +1,59 @@
+{
+  "rewrites": [
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/journey",
+      "destination": "/journey.html"
+    },
+    {
+      "source": "/recycle",
+      "destination": "/recycle.html"
+    },
+    {
+      "source": "/data",
+      "destination": "/data.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/journey.html",
+      "destination": "/journey",
+      "permanent": true
+    },
+    {
+      "source": "/recycle.html",
+      "destination": "/recycle",
+      "permanent": true
+    },
+    {
+      "source": "/data.html",
+      "destination": "/data",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+
