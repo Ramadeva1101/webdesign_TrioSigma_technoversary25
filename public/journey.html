@@ -88,6 +88,18 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg, #fb923c 0%, #f97316 100%) !important;
         }
+
+        /* Adjust position for tablet - lower Sisa sayur and first quiz */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            /* Sisa sayur (y: 5) - add 2% offset: (5 * 1.45) + 6 = 13.25%, so 13.25% + 2% = 15.25% */
+            button[data-item-y="5"] {
+                top: 15.25% !important;
+            }
+            /* First quiz button (position: 5) - add 2% offset: (5 * 1.45) + 6 = 13.25%, so 13.25% + 2% = 15.25% */
+            button[data-quiz-position="5"] {
+                top: 15.25% !important;
+            }
+        }
     </style>
 </head>
 
@@ -246,7 +258,7 @@
                         <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-10 leading-[1.05]"
                             style="color: #ffffff; text-shadow: 0 4px 16px rgba(0,0,0,0.6);">
                             Jejak Sampah<br class="hidden sm:block">
-                            <span style="color: #92400e; text-shadow: none;">di Lautan Waktu</span>
+                            <span style="color: #ffffff; text-shadow: 0 4px 16px rgba(0,0,0,0.6);">di Lautan Waktu</span>
                         </h1>
 
 
@@ -276,6 +288,7 @@
                     <button type="button"
                         class="absolute group transform -translate-x-1/2 -translate-y-1/2 text-center w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 focus:outline-none transition-all duration-300 active:scale-105 sm:active:scale-110 touch-manipulation"
                         :style="`top: ${(item.y * spacingFactor) + spacingOffset}%; left: ${item.x}%;`"
+                        :data-item-y="item.y"
                         @click="openWaste(item)">
                         <div class="relative w-full flex justify-center mb-1 sm:mb-2">
                             <div class="absolute inset-0 rounded-full opacity-0 group-active:opacity-100 sm:group-hover:opacity-100 transition-opacity duration-300 blur-xl"
@@ -310,7 +323,8 @@
                     <button type="button"
                         @click="currentQuiz = quiz.quizIndex; showQuizModal = true; answered = false; selected = null;"
                         class="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 group focus:outline-none transition-all duration-300 active:scale-105 sm:active:scale-110 touch-manipulation"
-                        :style="`top: ${(quiz.position * spacingFactor) + spacingOffset}%;`">
+                        :style="`top: ${(quiz.position * spacingFactor) + spacingOffset}%;`"
+                        :data-quiz-position="quiz.position">
                         <div class="relative">
                             <div class="absolute inset-0 rounded-full opacity-0 group-active:opacity-100 sm:group-hover:opacity-100 transition-opacity duration-300 blur-xl bg-stone-600/30"></div>
                             <div class="relative w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full bg-stone-800/90 backdrop-blur-sm flex items-center justify-center border border-stone-600/50 shadow-lg group-hover:border-stone-500/70 transition-all"
