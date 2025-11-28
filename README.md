@@ -1,6 +1,6 @@
 # TrashPedia 
 
-👥 Nama Tim, Anggota dan Asal Instansi
+Nama Tim, Anggota dan Asal Instansi
 
 Universitas Primakara
 
@@ -24,16 +24,6 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
 
 ---
 
-## 🚀 Cara Instalasi & Menjalankan Project
-
-### Langkah Instalasi
-
-1. **Clone Repository**
-   ```bash
-   git clone https://github.com/Ramadeva1101/webdesign_TrioSigma_technoversary25.git
-   cd webdesign_TrioSigma_technoversary25
-   ```
-
 2. **Install Dependencies**
    ```bash
    npm install
@@ -41,10 +31,11 @@ TrashPedia adalah platform edukasi interaktif yang menghadirkan visualisasi perj
 
 3. **Jalankan Development Server**
    ```bash
-   npm run dev
+   npm start
    ```
+   Server akan berjalan di `http://localhost:3000`
 
 4. **Buka di Browser**
    
-   Buka file `public/index.html` di browser
+   Buka `http://localhost:3000` di browser
 
