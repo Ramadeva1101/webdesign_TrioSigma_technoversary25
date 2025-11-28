@@ -11,8 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" as="image" href="./img/backgroundhomeleft.png">
+    <link rel="preload" as="image" href="./img/backgroundhomeright.png">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script defer src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="bg-stone-950 text-stone-300 antialiased selection:bg-orange-500 selection:text-white overflow-x-hidden"
@@ -89,19 +91,19 @@
         
         <div class="absolute left-0 bottom-0 w-1/2 h-[80%] z-[1] hidden md:block">
             <img src="./img/backgroundhomeleft.png" alt="Waste Background Left"
-                class="w-full h-full object-cover object-right-bottom">
+                class="w-full h-full object-cover object-right-bottom" fetchpriority="high">
         </div>
 
         
         <div class="absolute right-0 bottom-0 w-1/2 h-[80%] z-[1] hidden md:block">
             <img src="./img/backgroundhomeright.png" alt="Waste Background Right"
-                class="w-full h-full object-cover object-left-bottom">
+                class="w-full h-full object-cover object-left-bottom" fetchpriority="high">
         </div>
 
         
         <div class="absolute bottom-0 left-0 right-0 h-[60%] z-[1] md:hidden">
             <img src="./img/backgroundhomeleft.png" alt="Waste Background"
-                class="w-full h-full object-cover object-center">
+                class="w-full h-full object-cover object-center" fetchpriority="high">
         </div>
 
         
@@ -166,7 +168,7 @@
                     
                     <div class="relative h-64 md:h-auto overflow-hidden">
                         <img src="./img/headline berita utama mikroplastik.jpeg.jpg" alt="Mikroplastik di Indonesia"
-                            class="w-full h-full object-cover">
+                            class="w-full h-full object-cover" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     </div>
 
@@ -245,7 +247,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/microplastikdalamhujan.jpg" alt="Mikroplastik dalam Hujan"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
@@ -269,7 +271,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/tragedileuwigajah.webp" alt="Tragedi Leuwigajah"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
@@ -294,7 +296,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/viralwanita20tahun.png" alt="Viral Plastik 20 Tahun"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
@@ -318,7 +320,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/artikellamaterurai.jpg" alt="Lama Terurai Plastik"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
@@ -343,7 +345,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-orange-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/salahsatusampahabadistyrofoam.jpg" alt="Styrofoam Abadi"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
@@ -367,7 +369,7 @@
                     class="glass-panel-strong rounded-2xl border border-stone-800 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden group">
                     <div class="relative h-48 overflow-hidden">
                         <img src="./img/recycle jogja.jpeg.jpg" alt="Jogja Daur Ulang"
-                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300">
+                            class="w-full h-full object-fill group-hover:scale-105 transition-transform duration-300" loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-6">
