@@ -4,7 +4,7 @@
 
 **Universitas Primakara**
 
-1. Ken Jati Kusumo
+1. Ken Jatikusumo
 2. I Gede Ramadeva
 3. Alan Brian Frederick
 
