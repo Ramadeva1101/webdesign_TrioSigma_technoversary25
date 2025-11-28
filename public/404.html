@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrashPedia - Redirecting...</title>
+    <script>
+        // GitHub Pages 404.html handler untuk clean URLs
+        var path = window.location.pathname;
+        var segments = path.split('/').filter(Boolean);
+        var page = segments[segments.length - 1] || 'index';
+        
+        // List of valid pages
+        var validPages = ['index', 'about', 'journey', 'recycle', 'data', 'contact'];
+        
+        if (validPages.includes(page)) {
+            window.location.href = '/' + page + '.html';
+        } else {
+            window.location.href = '/index.html';
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
+
